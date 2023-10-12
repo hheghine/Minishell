@@ -1,4 +1,8 @@
 # Minishell
+
+![Minishell](https://github.com/hheghine/Minishell/assets/119530584/2ae54878-2cf4-4414-9f8f-f5c8eab9f99c)
+
+
 ## The Challenge
 
 - Display a promt while waiting for a new commmand.
