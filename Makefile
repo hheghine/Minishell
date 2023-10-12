@@ -16,10 +16,10 @@ LIBFT_PATH		= ./libraries/libft
 
 all:			$(OBJ_DIR) $(NAME)
 
-$(OBJ_DIR): $(SRC_DIR)
+$(OBJ_DIR): 	$(SRC_DIR)
 				@$(MK) $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADERS)
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADERS) Makefile
 				$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 $(NAME):		$(OBJS)
