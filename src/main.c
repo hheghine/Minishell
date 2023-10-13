@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/12 23:13:51 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/13 04:59:47 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	main()
 {
-	printf("\n%s\n\n", MINISHELL2);
+	printf("\n%s\n\n", MINISHELL1);
 }
