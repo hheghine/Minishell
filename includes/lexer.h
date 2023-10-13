@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/13 22:38:44 by hbalasan         ###   ########.fr       */
+/*   Created: 2023/10/13 21:18:50 by hbalasan          #+#    #+#             */
+/*   Updated: 2023/10/13 23:45:19 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef LEXER_H
+# define LEXER_H
 
-# include "../libraries/libft/libft.h"
-# include "visuals.h"
-# include "lexer.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "minishell.h"
+
+//
 
 #endif

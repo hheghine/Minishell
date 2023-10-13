@@ -12,7 +12,7 @@ OBJS			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 INCS			= -Iincludes
 CC				= cc 
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS			= #-Wall -Wextra -Werror #-fsanitize=address -g
 LIBFLAGS		= -lreadline
 RLFLAG			= -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 MK				= mkdir -p
