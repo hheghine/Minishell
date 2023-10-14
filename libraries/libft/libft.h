@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+/*****************************Libft*****************************/
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
@@ -67,5 +68,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+/**************************Libft Update**************************/
+void	ft_free_matrix(char ***m);
+char	**ft_dup_matrix(char **m);
+char	**ft_extend_matrix(char **in, char *newstr);
 
 #endif

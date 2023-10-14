@@ -26,16 +26,16 @@ $(OBJ_DIR): 	$(SRC_DIR)
 				@$(MK) $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADERS) Makefile
-				$(CC) $(CFLAGS) $(INCS) -c $< $(RLFLAG) -o $@
+				@$(CC) $(CFLAGS) $(INCS) -c $< $(RLFLAG) -o $@
 
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) $(INCS) -o $(NAME) $(OBJS) $(LIBFT) $(LIBFLAGS) $(RLFLAGS)
-				@echo "$(PINK)Minishell successfully compiled!$(RESET)\n"
+				@echo "$(PINK)✧ Minishell successfully compiled!$(RESET)\n"
 
 clean:			
 				@$(MAKE) clean -C ${LIBFT_PATH}  > /dev/null 2>&1
-				$(RM) $(OBJ_DIR)
-				@echo "$(PINK)Minishell successfully cleaned!$(RESET)\n"
+				@$(RM) $(OBJ_DIR)
+				@echo "$(PINK)✧ Minishell successfully cleaned!$(RESET)\n"
 
 fclean:			clean
 				@$(RM) $(NAME)

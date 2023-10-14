@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   mini_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 21:29:05 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/13 23:45:07 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:19:14 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 /*
 - command separators: ; && ||
@@ -26,7 +26,7 @@
 
 /*
 - environment variables
-	-USER=hbalasan42 used by our 42 header
+	- USER=hbalasan42 used by our 42 header
 	- PATH used everytime we write a command (shell will look for executables in different directories specified in the variable)
 	- PWD and OLDPWDupdated everytime we change directories. OLDPWD is used for cd - to go back to previous directory.
 	- HOME used for cd (with no arguments)
