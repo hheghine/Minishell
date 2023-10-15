@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/15 20:14:13 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:26:28 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	main(int argc, char **argv, char **env)
 			free(cmd);
 			break ;
 		}
+		if (!ft_strncmp(cmd, "$$", 2))
+			printf("pid: %d\n", prompt.pid);
 		if (ft_strlen(cmd) > 0)
     		add_history(cmd);
 		free(cmd);
