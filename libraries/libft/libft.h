@@ -69,8 +69,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /**************************Libft Update**************************/
+int		ft_matrixlen(char **matrix);
 void	ft_free_matrix(char ***m);
 char	**ft_dup_matrix(char **m);
 char	**ft_extend_matrix(char **in, char *newstr);
+/* Searches for the first occurrence of a character in a string and returns
+the index of that character in the string, or -1 if the character is not found */
+int		ft_strchr_idx(const char *s, int c);
 
 #endif

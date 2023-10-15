@@ -12,7 +12,7 @@ OBJS			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 INCS			= -Iincludes
 CC				= cc 
 RM				= rm -rf
-CFLAGS			= #-Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS			= -fsanitize=address -g #-Wall -Wextra -Werror 
 LIBFLAGS		= -lreadline
 RLFLAG			= -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 MK				= mkdir -p
@@ -30,12 +30,12 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADERS) Makefile
 
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) $(INCS) -o $(NAME) $(OBJS) $(LIBFT) $(LIBFLAGS) $(RLFLAGS)
-				@echo "$(PINK)✧ Minishell successfully compiled!$(RESET)\n"
+				@echo "$(PINK)✧ $(PURPLE)Minishell $(PINK)successfully compiled! ✧$(RESET)\n"
 
 clean:			
 				@$(MAKE) clean -C ${LIBFT_PATH}  > /dev/null 2>&1
 				@$(RM) $(OBJ_DIR)
-				@echo "$(PINK)✧ Minishell successfully cleaned!$(RESET)\n"
+				@echo "$(PINK)✧ $(PURPLE)Minishell $(PINK)successfully cleaned! ✧$(RESET)\n"
 
 fclean:			clean
 				@$(RM) $(NAME)

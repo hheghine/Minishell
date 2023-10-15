@@ -20,3 +20,23 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (0);
 }
+
+int	ft_strchr_idx(const char *s, int c)
+{
+	unsigned char	uc;
+	int				i;
+
+	i = 0;
+	if (!s)
+		return (-1);
+	uc = (unsigned char)c;
+	while (s[i] != '\0')
+	{
+		if (s[i] == uc)
+			return (i);
+		i++;
+	}
+	if (uc == '\0')
+		return (i);
+	return (-1);
+}

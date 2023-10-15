@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/14 16:23:20 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:42:33 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,15 @@ typedef struct s_command
 	int		outfile;
 }			t_command;
 
-/*       Handles Ctrl+C       */
-void	handle_sigint(int sig);
+/*********mini_error.c*********/
+void	error_msg(char *msg);	// prints custom error messages
+/*********mini_signal.c*********/
+void	handle_sigint(int sig);	// handles Ctrl+C
+/**************************mini_env.c**************************/
+// void	set_env(t_prompt *prompt, char *varname, char *value); // sets the new environment variable
+char	**set_env(char *var, char *value, char **envp);
+char	*get_env(char *varname, char **envp); // allocates a string with malloc containing the value of an env var
+
+void	free_prompt(t_prompt *prompt);
 
 #endif
