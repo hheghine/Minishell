@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/15 20:26:28 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/17 03:57:37 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ int	main(int argc, char **argv, char **env)
 		error_msg("Minishell doesn't take any arguments!\033[0m");
 	printf("\n%s\n\n", MINISHELL1);
 	init_prompt(&prompt, argv, env);
-	// for(int i = 0; prompt.envp[i]; i++)
-	// {
-	// 	for (int j = 0; prompt.envp[i][j]; j++)
-	// 		printf("%c", prompt.envp[i][j]);
-	// 	printf("\n");
-	// }
 	while (1)
 	{
 		signal(SIGINT, handle_sigint);
@@ -75,8 +69,21 @@ int	main(int argc, char **argv, char **env)
 			free(cmd);
 			break ;
 		}
-		if (!ft_strncmp(cmd, "$$", 2))
-			printf("pid: %d\n", prompt.pid);
+		// if (!ft_strncmp(cmd, "$$", 2))
+		// 	printf("pid: %d\n", prompt.pid);
+		// if (!ft_strncmp(cmd, "user", 4))
+		// {
+		// 	char *user = get_env("USER", prompt.envp);
+		// 	if (user)
+		// 		printf("%s\n", user);
+		// 	free(user);
+		// }
+		// if (!ft_strncmp(cmd, "pwd", 3))
+		// {
+		// 	char *pwd = get_env("PWD", prompt.envp);
+		// 	printf("%s\n", pwd);
+		// 	free(pwd);
+		// }
 		if (ft_strlen(cmd) > 0)
     		add_history(cmd);
 		free(cmd);

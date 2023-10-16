@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/15 19:42:33 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/17 03:51:14 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libraries/libft/libft.h"
 # include "visuals.h"
+# include "error.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -29,11 +30,11 @@
 /*******Pipes*******/
 # define READ_END 0
 # define WRITE_END 1
-
+/*******************/
 /******Signals******/
 # define SIGINT 2	// the signal number for SIGINT (Signal Interrupt)
-# define CtrlC 130	// the exit status code of the program that was terminated by receiving the SIGINT signal
-
+# define CTRLC 130	// the exit status code of the program that was terminated by receiving the SIGINT signal
+/******************/
 typedef struct s_prompt
 {
 	t_list	*cmds;
@@ -49,15 +50,13 @@ typedef struct s_command
 	int		outfile;
 }			t_command;
 
-/*********mini_error.c*********/
-void	error_msg(char *msg);	// prints custom error messages
 /*********mini_signal.c*********/
 void	handle_sigint(int sig);	// handles Ctrl+C
 /**************************mini_env.c**************************/
 // void	set_env(t_prompt *prompt, char *varname, char *value); // sets the new environment variable
 char	**set_env(char *var, char *value, char **envp);
 char	*get_env(char *varname, char **envp); // allocates a string with malloc containing the value of an env var
-
+/**************mini_free.c**************/
 void	free_prompt(t_prompt *prompt);
 
 #endif

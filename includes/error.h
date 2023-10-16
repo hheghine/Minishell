@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_signal.c                                      :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 16:00:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/17 03:32:35 by hbalasan         ###   ########.fr       */
+/*   Created: 2023/10/17 01:53:08 by hbalasan          #+#    #+#             */
+/*   Updated: 2023/10/17 03:50:35 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int	sigstat;
-
-void	handle_sigint(int sig)
+enum	e_error
 {
-	if (sig == SIGINT)
-	{
-		sigstat = CTRLC;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
-}
+	EPERM = 1,
+	EMEM,
+	ENOTDIR,
+	EISDIR,
+	NDIR,
+	ECMD,
+	EFORK,
+	EPIPE,
+	EPIPEND,
+	DUPERR,
+	EQUOTE
+};
+
+/*********mini_error.c*********/
+void	error_msg(char *msg); // prints custom error messages
+
+#endif
