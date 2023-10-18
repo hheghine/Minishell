@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 22:23:37 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/17 03:55:18 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/18 04:12:08 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 # define VISUALS_H
 
 /*********ANSI BASIC COLORS*********/
-# define BLACK_BOLD		"\033[1;30m"
-# define RED_BOLD		"\033[1;31m"
-# define GREEN_BOLD		"\033[1;32m"
-# define YELLOW_BOLD	"\033[1;33m"
-# define BLUE_BOLD		"\033[1;34m"
-# define MAGENTA_BOLD	"\033[1;35m"
-# define CYAN_BOLD		"\033[1;36m"
-# define WHITE_BOLD		"\033[1;37m"
-# define RESET_COLOR	"\033[0m"
+# define BLACK_BOLD "\033[1;30m"
+# define RED_BOLD "\033[1;31m"
+# define GREEN_BOLD "\033[1;32m"
+# define YELLOW_BOLD "\033[1;33m"
+# define BLUE_BOLD "\033[1;34m"
+# define MAGENTA_BOLD "\033[1;35m"
+# define CYAN_BOLD "\033[1;36m"
+# define WHITE_BOLD "\033[1;37m"
 /************ANSI COLORS************/
-# define BLACK			"\033[30m"
-# define RED			"\033[31m"
-# define LIGHT_RED		"\033[91m"
-# define GREEN			"\033[32m"
-# define LIGHT_GREEN	"\033[92m"
-# define YELLOW			"\033[33m"
-# define LIGHT_YELLOW	"\033[93m"
-# define BLUE			"\033[34m"
-# define LIGHT_BLUE		"\033[94m"
-# define MAGENTA		"\033[35m"
-# define LIGHT_MAGENTA	"\033[95m"
-# define CYAN			"\033[36m"
-# define LIGHT_CYAN		"\033[96m"
-# define WHITE			"\033[37m"
-# define GREY			"\033[90m"
-# define LIGHT_GREY		"\033[37m"
+# define BLACK "\033[30m"
+# define RED "\033[31m"
+# define LIGHT_RED "\033[91m"
+# define GREEN "\033[32m"
+# define LIGHT_GREEN "\033[92m"
+# define YELLOW "\033[33m"
+# define LIGHT_YELLOW "\033[93m"
+# define BLUE "\033[34m"
+# define LIGHT_BLUE "\033[94m"
+# define MAGENTA "\033[35m"
+# define LIGHT_MAGENTA "\033[95m"
+# define CYAN "\033[36m"
+# define LIGHT_CYAN "\033[96m"
+# define WHITE "\033[37m"
+# define GREY "\033[90m"
+# define LIGHT_GREY "\033[37m"
 /**********************************/
-# define PURPLE			"\033[0;34m"
-# define PINK			"\033[0;35m"
-# define SKY			"\033[0;36m"
+# define PURPLE "\033[0;34m"
+# define PINK "\033[0;35m"
+# define SKY "\033[0;36m"
 /**********************************/
+# define DEFAULT "\033[0m"
 
 /*
 #######################################################
@@ -96,7 +96,7 @@ echo
 ║\033[0;34m    ✧  ██║╚██╔╝██║██║██║╚████║██║░╚═══██╗██╔══██║██╔══╝░░██║░░░░░██║░░░░░    ✧ \033[96m║\n\
 ║\033[0;36m ✧     ██║░╚═╝░██║██║██║░╚███║██║██████╔╝██║░░██║███████╗███████╗███████╗  ✧   \033[96m║\n\
 ║  ✧   ✧      ✧   ✧      ✧  ✧       ✧           ✧ ✧         ✧   ✧     ✧     ✧   ║\n\
-╚═══════════════════════════════════════════════════════════════════════════════╝\n"
+╚═══════════════════════════════════════════════════════════════════════════════╝\033[0m\n"
 
 # define MINISHELL2	"\033[95m╔═══════════════════════════════════════════════════════════════════╗\n\
 ║                                                                   ║\n\
@@ -106,6 +106,7 @@ echo
 ║                                                                   ║\n\
 ╚═══════════════════════════════════════════════════════════════════╝\n"
 
-# define READLINE_MSG	"\033[1;30muser\033[1;35m✧ mini\033[1;36mshell\033[35m$\033[1;30m~/Desktop> \033[0m"
+# define READLINE_MSG	"\033[1;35m✧ mini\033[1;36mshell\033[35m$\033[1;30m"
+# define READLINE_MSG1 "\033[1;30mguest\033[1;35m✧ mini\033[1;36mshell\033[35m$\033[1;30m> \033[0;39m"
 
 #endif

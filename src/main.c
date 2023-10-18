@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/17 03:57:37 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/18 04:12:33 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	sigstat;
+extern int	ministat;
 
 void	init_varp(t_prompt *prompt, char **argv, char **env)
 {
@@ -46,13 +46,14 @@ void	init_prompt(t_prompt *prompt, char **argv, char **env)
 	prompt->cmds = NULL;
 	prompt->envp = ft_dup_matrix(env);
 	prompt->pid = getpid();
-	sigstat = 0;
+	ministat = 0;
 	init_varp(prompt, argv, env);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_prompt	prompt;
+	char		*str;
 	char		*cmd = "";
 	
 	if (argc > 1)
@@ -63,31 +64,24 @@ int	main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = readline(READLINE_MSG);
+		str = get_prompt(prompt);
+		if(str)
+		{
+			cmd = readline(str);
+			free(str);
+		}
+		else
+			cmd = readline(READLINE_MSG1);
 		if (!cmd || !ft_strncmp(cmd, "exit", 4))
 		{
+			printf("exit\n");
 			free(cmd);
 			break ;
 		}
-		// if (!ft_strncmp(cmd, "$$", 2))
-		// 	printf("pid: %d\n", prompt.pid);
-		// if (!ft_strncmp(cmd, "user", 4))
-		// {
-		// 	char *user = get_env("USER", prompt.envp);
-		// 	if (user)
-		// 		printf("%s\n", user);
-		// 	free(user);
-		// }
-		// if (!ft_strncmp(cmd, "pwd", 3))
-		// {
-		// 	char *pwd = get_env("PWD", prompt.envp);
-		// 	printf("%s\n", pwd);
-		// 	free(pwd);
-		// }
 		if (ft_strlen(cmd) > 0)
     		add_history(cmd);
 		free(cmd);
 	}
 	free_prompt(&prompt);
-	return (sigstat);
+	return (ministat);
 }
