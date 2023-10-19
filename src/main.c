@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/18 04:12:33 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:21:52 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	ministat;
+extern int	gstatus;
 
 void	init_varp(t_prompt *prompt, char **argv, char **env)
 {
@@ -46,7 +46,7 @@ void	init_prompt(t_prompt *prompt, char **argv, char **env)
 	prompt->cmds = NULL;
 	prompt->envp = ft_dup_matrix(env);
 	prompt->pid = getpid();
-	ministat = 0;
+	gstatus = 0;
 	init_varp(prompt, argv, env);
 }
 
@@ -83,5 +83,5 @@ int	main(int argc, char **argv, char **env)
 		free(cmd);
 	}
 	free_prompt(&prompt);
-	return (ministat);
+	return (gstatus);
 }

@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:31:27 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/18 03:43:25 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:21:52 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	ministat;
+extern int	gstatus;
 
 char	*get_user(t_prompt prompt)
 {
@@ -67,7 +67,10 @@ char	*get_prompt(t_prompt prompt)
 	temp = ft_strjoin(temp1, temp2);
 	free(temp1);
 	free(temp2);
-	temp1 = ft_strjoin(temp, "> ");
+	// if (!gstatus || gstatus == -1)
+		temp1 = ft_strjoin(temp, "> ");
+	// else
+	// 	temp1 = ft_strjoin(temp, "\033[1;33m> ");
 	free(temp);
 	temp2 = ft_strjoin(temp1, DEFAULT);
 	free(temp1);
