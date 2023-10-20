@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 00:01:06 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 02:33:40 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,18 @@ typedef struct s_command
 void	handle_sigint(int sig);	// handles Ctrl+C
 /**********************mini_env.c**********************/
 char	**set_env(char *var, char *value, char **envp); // sets the new environment variable
-char	*get_env(char *varname, char **envp); // allocates a string with malloc containing the value of an env var
+char	*get_env(char *varname, char **envp, int n1); // allocates a string with malloc containing the value of an env var
 /**************mini_free.c**************/
 void	free_prompt(t_prompt *prompt);
+void	free_content(void *content);
 /*************mini_prompt.c*************/
 char	*get_prompt(t_prompt prompt);
 /*****************mini_parse.c*****************/
-void	*check_args(char *cmd, t_prompt prompt);
+void	*check_args(char *cmd, t_prompt *prompt);
 /****************mini_cmdtrim.c****************/
 char	**cmd_trim(const char *s, char *set);
+/**************************mini_expand.c**************************/
+char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i);
+char	*expand_path(char *s, int q[2], char *getpath, int i);
 
 #endif

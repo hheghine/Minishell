@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/20 22:11:02 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 01:52:22 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_varp(t_prompt *prompt, char **argv, char **env)
 	str  = getcwd(NULL, 0);
 	prompt->envp = set_env("PWD", str, prompt->envp);
 	free(str);
-	str = get_env("SHLVL", prompt->envp);
+	str = get_env("SHLVL", prompt->envp, -1);
 	if (!str || ft_atoi(str) <= 0)
 		num = ft_strdup("1");
 	else
@@ -30,12 +30,12 @@ void	init_varp(t_prompt *prompt, char **argv, char **env)
 	free(str);
 	prompt->envp = set_env("SHLVL", num, prompt->envp);
 	free(num);
-	str = get_env("PATH", prompt->envp);
+	str = get_env("PATH", prompt->envp, -1);
 	if (!str)
 		prompt->envp = set_env("PATH", \
 		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin", prompt->envp);
 	free(str);
-	str = get_env("_", prompt->envp);
+	str = get_env("_", prompt->envp, -1);
 	if (!str)
 		prompt->envp = set_env("_", argv[0], prompt->envp); // "_" (underscore) is used to store the last argument to the last executed command
 	free(str);						   						// "!!" the last command that you executed
@@ -45,7 +45,7 @@ void	init_prompt(t_prompt *prompt, char **argv, char **env)
 {
 	prompt->cmds = NULL;
 	prompt->envp = ft_dup_matrix(env);
-	prompt->pid = getpid();
+	prompt->pid = getpid(); // check this part
 	gstatus = 0;
 	init_varp(prompt, argv, env);
 }
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 			cmd = readline(READLINE_MSG1);
-		if (!check_args(cmd, prompt)) // cmd is being freed
+		if (!check_args(cmd, &prompt)) // cmd is being freed
 			break ;
 	}
 	free_prompt(&prompt);

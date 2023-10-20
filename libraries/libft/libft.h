@@ -76,5 +76,8 @@ char	**ft_extend_matrix(char **in, char *newstr);
 /* Searches for the first occurrence of a character in a string and returns
 the index of that character in the string, or -1 if the character is not found */
 int		ft_strchr_idx(const char *s, int c);
+/* Searches for the first occurrence of any character in the set within the input string s.
+If a match is found, it returns the index of the character in s; otherwise, it returns -1.*/
+int		ft_strchr_set(const char *s, char *set);
 
 #endif

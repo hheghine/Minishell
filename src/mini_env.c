@@ -6,20 +6,20 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:51:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/16 03:35:32 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 01:44:34 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*get_env(char *varname, char **envp)
+char	*get_env(char *varname, char **envp, int n1)
 {
 	int	i;
-	int	n1;
 	int	n2;
 
 	i = 0;
-	n1 = ft_strlen(varname);
+	if (n1 < 0)
+		n1 = ft_strlen(varname);
 	while (!ft_strchr(varname, '=') && envp && envp[i])
 	{
 		n2 = n1;

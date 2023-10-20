@@ -40,3 +40,19 @@ int	ft_strchr_idx(const char *s, int c)
 		return (i);
 	return (-1);
 }
+
+int	ft_strchr_set(const char *s, char *set)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (-1);
+	while (s[i] != '\0')
+	{
+		if (ft_strchr(set, s[i]))
+			return (i);
+		i++;
+	}
+	return (-1);
+}

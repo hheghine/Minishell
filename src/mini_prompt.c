@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:31:27 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/19 15:21:52 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 01:46:26 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_user(t_prompt prompt)
 	char	*user;
 	char	*temp;
 
-	user = get_env("USER", prompt.envp);
+	user = get_env("USER", prompt.envp, -1);
 	if (!user)
 		user = ft_strdup("guest");
 	if(!strncmp(user, "root", 4))
@@ -39,7 +39,7 @@ char	*get_home(t_prompt prompt)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		pwd = ft_strdup("⚠ ");
-	home = get_env("HOME", prompt.envp);
+	home = get_env("HOME", prompt.envp, -1);
 	if (home && home[0] && ft_strnstr(pwd, home, ft_strlen(pwd)))
 	{
 		temp = pwd;
