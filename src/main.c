@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/19 15:21:52 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/20 22:11:02 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 			cmd = readline(READLINE_MSG1);
-		if (!cmd || !ft_strncmp(cmd, "exit", 4))
-		{
-			printf("exit\n");
-			free(cmd);
+		if (!check_args(cmd, prompt)) // cmd is being freed
 			break ;
-		}
-		if (ft_strlen(cmd) > 0)
-    		add_history(cmd);
-		free(cmd);
 	}
 	free_prompt(&prompt);
 	return (gstatus);

@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/20 00:45:54 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/20 23:55:14 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ void	error_msg(char *msg)
 	exit (1);
 }
 
-void	mini_error(int errmsg, char *param, int errcode)
+static void	set_status(int errcode)
 {
 	gstatus = errcode;
-	ft_putchar_fd("\033[1;33m⚠ minishell: ", 2);
+	ft_putstr_fd("\033[1;33m⚠ minishell: ", 2);
+}
+
+void	*mini_error(int errmsg, char *param, int errcode)
+{
+	set_status(errcode);
 	if (errmsg == EPERM)
 		ft_putstr_fd("\033[0;33mpermission denied: \033[0m", 2);
 	else if (errmsg == EMEM)
@@ -47,4 +52,5 @@ void	mini_error(int errmsg, char *param, int errcode)
 	else if (errmsg == EQUOTE)
 		ft_putstr_fd("\033[0;33merror while looking for matching quote\n", 2);
 	ft_putendl_fd(param, 2);
+	return (NULL);
 }

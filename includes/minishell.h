@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/18 04:15:53 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:01:06 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ typedef struct s_command
 
 /*********mini_signal.c*********/
 void	handle_sigint(int sig);	// handles Ctrl+C
-/**************************mini_env.c**************************/
+/**********************mini_env.c**********************/
 char	**set_env(char *var, char *value, char **envp); // sets the new environment variable
 char	*get_env(char *varname, char **envp); // allocates a string with malloc containing the value of an env var
 /**************mini_free.c**************/
 void	free_prompt(t_prompt *prompt);
 /*************mini_prompt.c*************/
-char	*get_prompt(t_prompt prompt); // makes the colored prompt
+char	*get_prompt(t_prompt prompt);
+/*****************mini_parse.c*****************/
+void	*check_args(char *cmd, t_prompt prompt);
+/****************mini_cmdtrim.c****************/
+char	**cmd_trim(const char *s, char *set);
 
 #endif
