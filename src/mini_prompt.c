@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:31:27 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 01:46:26 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:13:05 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_user(t_prompt prompt)
 	user = get_env("USER", prompt.envp, -1);
 	if (!user)
 		user = ft_strdup("guest");
-	if(!strncmp(user, "root", 4))
+	if(!ft_strncmp(user, "root", 4))
 		temp = ft_strjoin(YELLOW, user);
 	else
 		temp = ft_strjoin(BLACK_BOLD, user);
