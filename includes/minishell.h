@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 02:33:40 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:50:57 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ char	*get_prompt(t_prompt prompt);
 /*****************mini_parse.c*****************/
 void	*check_args(char *cmd, t_prompt *prompt);
 /****************mini_cmdtrim.c****************/
-char	**cmd_trim(const char *s, char *set);
+char	**cmd_trim(const char *str, char *set);
 /**************************mini_expand.c**************************/
 char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i);
 char	*expand_path(char *s, int q[2], char *getpath, int i);
+/******************mini_subsplit.c******************/
+char	**cmd_subsplit(const char *str, char *set);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 18:02:29 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:50:09 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char **split_final(char **args, t_prompt *prompt)
 		args[i] = expand_vars(args[i], prompt, q, -1);
 		args[i] = expand_path(args[i], q, \
 			get_env("HOME", prompt->envp, -1), -1);
-		//subsplit = cmd_subsplit(args[i], "<>|"); // split commands with <, >, or | 
+		subsplit = cmd_subsplit(args[i], "<>|"); // split commands with <, >, or | 
 		// then i need to replace n-th line with another matrix, yes, i think it's gonna be a ***BIG_MATRIX
 		//i += ft_matrix_len(subsplit);
-		// ft_free_subsplit(subsplit);
+		ft_free_matrix(&subsplit);
 	}
 	return (args);
 }
