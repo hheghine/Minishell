@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 20:50:57 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:34:16 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_command
 }			t_command;
 
 /*********mini_signal.c*********/
+void	my_sa_handler(void);
 void	handle_sigint(int sig);	// handles Ctrl+C
 /**********************mini_env.c**********************/
 char	**set_env(char *var, char *value, char **envp); // sets the new environment variable
@@ -69,5 +70,9 @@ char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i);
 char	*expand_path(char *s, int q[2], char *getpath, int i);
 /******************mini_subsplit.c******************/
 char	**cmd_subsplit(const char *str, char *set);
+
+char	*strtrim_quotes(const char *str, int squote, int dquote);
+
+t_list	*fill_nodes(char **args, int i);
 
 #endif

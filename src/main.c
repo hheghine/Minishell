@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 01:52:22 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/22 23:16:19 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	init_varp(t_prompt *prompt, char **argv, char **env)
 		prompt->envp = set_env("PATH", \
 		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin", prompt->envp);
 	free(str);
-	str = get_env("_", prompt->envp, -1);
+	str = get_env("_", prompt->envp, -1); // "_" (underscore) is used to store the last argument to the last executed command
 	if (!str)
-		prompt->envp = set_env("_", argv[0], prompt->envp); // "_" (underscore) is used to store the last argument to the last executed command
-	free(str);						   						// "!!" the last command that you executed
+		prompt->envp = set_env("_", argv[0], prompt->envp); // "!!" the last command that you executed
+	free(str);
 }
 
 void	init_prompt(t_prompt *prompt, char **argv, char **env)
@@ -62,8 +62,9 @@ int	main(int argc, char **argv, char **env)
 	init_prompt(&prompt, argv, env);
 	while (1)
 	{
-		signal(SIGINT, handle_sigint);
-		signal(SIGQUIT, SIG_IGN);
+		my_sa_handler();
+		// signal(SIGINT, handle_sigint);
+		// signal(SIGQUIT, SIG_IGN);
 		str = get_prompt(prompt);
 		if(str)
 		{

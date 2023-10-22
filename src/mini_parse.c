@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 20:50:09 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:47:11 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char **split_final(char **args, t_prompt *prompt)
 		args[i] = expand_path(args[i], q, \
 			get_env("HOME", prompt->envp, -1), -1);
 		subsplit = cmd_subsplit(args[i], "<>|"); // split commands with <, >, or | 
-		// then i need to replace n-th line with another matrix, yes, i think it's gonna be a ***BIG_MATRIX
-		//i += ft_matrix_len(subsplit);
+		ft_matrix_replace(&args, subsplit, i);
+		i += ft_matrixlen(subsplit) - 1;
 		ft_free_matrix(&subsplit);
 	}
 	return (args);
@@ -40,16 +40,7 @@ void	*parse_args(char **args, t_prompt *prompt)
 
 	exitcode = 0;
 	splitted = split_final(args, prompt);
-	
-	for (int i = 0; splitted[i]; i++)
-	{
-		for (int j = 0; splitted[i][j]; j++)
-			printf("%c", splitted[i][j]);
-		printf("\n");
-	}
-	
-	ft_free_matrix(&splitted);
-	// prompt->cmds = fill_nodes(splitted);
+	prompt->cmds = fill_nodes(splitted, -1);
 }
 
 void	*check_args(char *cmd, t_prompt *prompt)
@@ -59,7 +50,7 @@ void	*check_args(char *cmd, t_prompt *prompt)
 
 	if (!cmd || !ft_strncmp(cmd, "exit", 4))
 	{
-		printf("\033[1;35mexit⋆⁺₊⋆ ☾⋆⁺₊⋆\033[0m\n");
+		printf("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n");
 		free(cmd);
 		return (NULL);
 	}

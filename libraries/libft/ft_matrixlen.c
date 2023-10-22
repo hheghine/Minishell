@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:01 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/15 20:17:05 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/22 21:39:18 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,32 @@ char	**ft_extend_matrix(char **in, char *newstr)
 	out[i] = ft_strdup(newstr);
 	ft_free_matrix(&in);
 	return (out);
+}
+
+char	**ft_matrix_replace(char ***big, char **small, int n)
+{
+	char	**temp;
+	int		i[3];
+
+	i[0] = -1;
+	i[1] = -1;
+	i[2] = -1;
+	if (!big || !*big || n < 0 || n >= ft_matrixlen(*big))
+		return (NULL);
+	temp = ft_calloc(ft_matrixlen(*big) + ft_matrixlen(small), sizeof(char *));
+	while (temp && big[0][++i[0]])
+	{
+		if (i[0] != n)
+			temp[++i[2]] = ft_strdup(big[0][i[0]]);
+		else
+		{
+			while (small && small[++i[1]])
+				temp[++i[2]] = ft_strdup(small[i[1]]);
+		}
+	}
+	ft_free_matrix(big);
+	*big = temp;
+	return (*big);
 }
 
 void	ft_free_matrix(char ***m)
