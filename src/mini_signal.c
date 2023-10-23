@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:00:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/22 23:32:44 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:48:34 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	gstatus;
 //     void (*sa_restorer)(void);    // Not used in modern systems, reserved for future use
 // };
 
-void my_sa_handler(void)
+void sigaction_handler(void)
 {
     struct sigaction sa;
 

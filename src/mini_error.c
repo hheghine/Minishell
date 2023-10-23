@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/20 23:55:14 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:44:04 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	error_msg(char *msg)
 {
 	printf("%s %s %s\n", "\033[1;33m⚠ minishell: \033[0;33m", msg, DEFAULT);
 	exit (1);
+}
+
+void	print_error_msg_fd(char *msg)
+{
+	ft_putstr_fd("\033[1;33m⚠ minishell: \033[0;33m", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putendl_fd(DEFAULT, 2);
 }
 
 static void	set_status(int errcode)

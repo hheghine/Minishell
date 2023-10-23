@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 01:53:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/20 22:55:00 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/23 22:10:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef enum e_error
 	EQUOTE // error while looking for matching quote
 } e_error;
 
-// # define EARG 128 // Invalid argument to exit							Bash Error Message: "Invalid argument"
-
-/*********mini_error.c*********/
-void	error_msg(char *msg);
-void	*mini_error(int errmsg, char *param, int errcode);
+/************************mini_error.c************************/
+void	error_msg(char *msg);                               //
+void	*mini_error(int errmsg, char *param, int errcode);  //
+void	print_error_msg_fd(char *msg);                      //
+/************************************************************/
 
 #endif

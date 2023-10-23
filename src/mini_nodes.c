@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 02:47:49 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:46:22 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,35 @@ static char	**trim_args(char **args)
 	return (trimmed);
 }
 
+static t_command	*cmd_parameters(t_command *node, char **args[2], int *i)
+{
+	if (args[0][*i])
+	{
+		
+	}
+}
+
 t_list	*fill_nodes(char **args, int i)
 {
 	char	**temp[2];
+	t_list	*nodes[2];
 
-	temp[0] = trim_args(args);
-
-	for (int i = 0; temp[0][i]; i++)
+	nodes[0] = NULL;
+	temp[1] = trim_args(args);
+	while (args[++i])
 	{
-		for (int j = 0; temp[0][i][j]; j++)
-			printf("%c", temp[0][i][j]);
-		printf("\n");
+		nodes[1] = ft_lstlast(nodes[0]);
+		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
+		{
+			i += (args[i][0] == '|');
+			ft_lstadd_back(&nodes[0], ft_lstnew(mini_init()));
+			nodes[1] = ft_lstlast(nodes[0]);
+		}
+		temp[0] = args;
+		nodes[1]->content = cmd_parameters(nodes[1]->content, temp, &i);
 	}
-	ft_free_matrix(&temp[0]); // temporary
-	ft_free_matrix(&args); // temporary
+	
+	// ft_free_matrix(&temp[1]); // temporary
+	// ft_free_matrix(&args); // temporary
 	return (NULL);
 }
