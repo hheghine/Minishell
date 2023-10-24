@@ -5,12 +5,15 @@
 ---
 ## What Is Bash and How Does It Work?
 
-The shell is a program that the user can use to interact with an operating system's services. [Bash](https://www.gnu.org/software/bash/manual/bash.html) is the GNU shell, and is currently the most common shell program. We took the challenge of recreating bash very literally, so the first thing we did was learn [how bash actually works](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf). Essentially it breaks down the process into 4 steps: `lexer` → `parser` → `expander` → `executor`.
+The shell is a program that receives keyboard commands and forwards them to the operating system for execution. Almost all Linux distributions supply a shell program from the GNU Project called [Bash](https://www.gnu.org/software/bash/manual/bash.html). The name is an acronym for "Bourne-again shell," in reference to the fact that Bash is an enhanced replacement for "sh," the original Unix shell program written by Steve Bourne.
+
+So [how bash actually works](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)? Essentially it breaks down the process into 4 steps: `lexer` → `parser` → `expander` → `executor`.
 
 The general idea for this shell is reading a string of commands in a prompt using [readline](https://www.man7.org/linux/man-pages/man3/readline.3.html).
 
 ## The Challenge
 
+- Follow the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html).
 - Display a promt while waiting for a new commmand.
 - Have a working history.
 - Find and launch executables (using the PATH variable or an absolute path).
