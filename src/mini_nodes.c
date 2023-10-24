@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/24 20:09:30 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/25 00:18:05 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,39 @@ static char	**trim_args(char **args)
 	return (trimmed);
 }
 
-static t_command	*cmd_parameters(t_command *node, char **args[2], int *i)
+static t_command	*cmd_parameters(t_command *cmd, char **args[2], int *i)
 {
 	if (args[0][*i])
 	{
 		if (args[0][*i][0] == '>' && args[0][*i + 1] && args[0][*i + 1][0] == '>')
-			node = open_outfile2(node, args[1], i);
+			cmd = open_outfile2(cmd, args[1], i);
 		else if (args[0][*i][0] == '>')
-			node = open_outfile1(node, args[1], i);
+			cmd = open_outfile1(cmd, args[1], i);
 		else if (args[0][*i][0] == '<' && args[0][*i + 1] \
 			&& args[0][*i + 1][0] == '<')
-			node = open_infile2(node, args[1], i);
+			cmd = open_infile2(cmd, args[1], i);
 		else if (args[0][*i][0] == '<')
-			node = open_infile1(node, args[1], i);
+			cmd = open_infile1(cmd, args[1], i);
 		else if (args[0][*i][0] != '|')
-			node->full_cmd = ft_extend_matrix(node->full_cmd, args[1][*i]);
+			cmd->full_cmd = ft_extend_matrix(cmd->full_cmd, args[1][*i]);
 		else
 		{
 			mini_error(EPIPEND, NULL, 2);
 			*i = -2;
 		}
-		return(node);
+		return(cmd);
 	}
 	mini_error(EPIPEND, NULL, 2);
 	*i = -2;
-	return (node);
+	return (cmd);
+}
+
+t_command	*free_nodes(t_list *node, char **args, char **temp)
+{
+	ft_lstclear(&node, free_content);
+	ft_free_matrix(&args);
+	ft_free_matrix(&temp);
+	return (NULL);
 }
 
 t_list	*fill_nodes(char **args, int i)
@@ -75,8 +83,9 @@ t_list	*fill_nodes(char **args, int i)
 	char	**temp[2];
 	t_list	*nodes[2];
 
-	nodes[0] = NULL;
+	temp[0] = args;
 	temp[1] = trim_args(args);
+	nodes[0] = NULL;
 	while (args[++i])
 	{
 		nodes[1] = ft_lstlast(nodes[0]);
@@ -86,11 +95,13 @@ t_list	*fill_nodes(char **args, int i)
 			ft_lstadd_back(&nodes[0], ft_lstnew(mini_init()));
 			nodes[1] = ft_lstlast(nodes[0]);
 		}
-		temp[0] = args;
 		nodes[1]->content = cmd_parameters(nodes[1]->content, temp, &i);
+		if (i < 0)
+			return (free_nodes(nodes[0], args, temp));
+		if (!args[i])
+			break ;
 	}
-	
-	// ft_free_matrix(&temp[1]); // temporary
-	// ft_free_matrix(&args); // temporary
-	return (NULL);
+	ft_free_matrix(&temp[1]);
+	ft_free_matrix(&args);
+	return (nodes[0]);
 }
