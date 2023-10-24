@@ -5,7 +5,7 @@
 ---
 ## What Is Bash and How Does It Work?
 
-The shell is a program that receives keyboard commands and forwards them to the operating system for execution. Almost all Linux distributions supply a shell program from the GNU Project called [Bash](https://www.gnu.org/software/bash/manual/bash.html). The name is an acronym for "Bourne-again shell," in reference to the fact that Bash is an enhanced replacement for "sh," the original Unix shell program written by Steve Bourne.
+The shell is a program that that takes keyboard commands and passes them to the operating system to carry out. Almost all Linux distributions supply a shell program from the GNU Project called [Bash](https://www.gnu.org/software/bash/manual/bash.html). The name is an acronym for "Bourne-again shell," in reference to the fact that Bash is an enhanced replacement for "sh," the original Unix shell program written by Steve Bourne.
 
 So [how bash actually works](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)? Essentially it breaks down the process into 4 steps: `lexer` → `parser` → `expander` → `executor`.
 
