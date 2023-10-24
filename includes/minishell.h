@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 22:38:03 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/24 04:17:10 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_command
 void		sigaction_handler(void);
 void		handle_sigint(int sig);
 /*****************************mini_env.c****************************/
-char		**set_env(char *var, char *value, char **envp);            // sets the new environment variable
-char		*get_env(char *varname, char **envp, int n1);              // allocates a string containing the value of an env var
+char		**set_env(char *var, char *value, char **envp);
+char		*get_env(char *varname, char **envp, int n1);
 /****************************mini_free.c****************************/
 void		free_prompt(t_prompt *prompt);
 void		free_content(void *content);
@@ -75,12 +75,13 @@ char		**cmd_subsplit(const char *str, char *set);
 char		*strtrim_quotes(const char *str, int squote, int dquote);
 /****************************mini_nodes.c***************************/
 t_list		*fill_nodes(char **args, int i);
-/***************************mini_params.c***************************/
+/*****************************mini_fd.c*****************************/
 int			get_fd(int prev_fd, char *path, int flags[2]);
-t_command	*get_outfile1(t_command *node, char **args, int *i);
-t_command	*get_outfile2(t_command *node, char **args, int *i);
-t_command	*get_infile1(t_command *node, char **args, int *i);
-t_command	*get_infile2(t_command *node, char **args, int *i);
+/***************************mini_iofiles.c**************************/
+t_command	*open_outfile1(t_command *node, char **args, int *i);
+t_command	*open_outfile2(t_command *node, char **args, int *i);
+t_command	*open_infile1(t_command *node, char **args, int *i);
+t_command	*open_infile2(t_command *node, char **args, int *i);
 /*******************************************************************/
 
 #endif
