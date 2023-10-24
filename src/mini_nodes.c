@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 17:46:22 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:09:30 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,27 @@ static t_command	*cmd_parameters(t_command *node, char **args[2], int *i)
 {
 	if (args[0][*i])
 	{
-		
+		if (args[0][*i][0] == '>' && args[0][*i + 1] && args[0][*i + 1][0] == '>')
+			node = open_outfile2(node, args[1], i);
+		else if (args[0][*i][0] == '>')
+			node = open_outfile1(node, args[1], i);
+		else if (args[0][*i][0] == '<' && args[0][*i + 1] \
+			&& args[0][*i + 1][0] == '<')
+			node = open_infile2(node, args[1], i);
+		else if (args[0][*i][0] == '<')
+			node = open_infile1(node, args[1], i);
+		else if (args[0][*i][0] != '|')
+			node->full_cmd = ft_extend_matrix(node->full_cmd, args[1][*i]);
+		else
+		{
+			mini_error(EPIPEND, NULL, 2);
+			*i = -2;
+		}
+		return(node);
 	}
+	mini_error(EPIPEND, NULL, 2);
+	*i = -2;
+	return (node);
 }
 
 t_list	*fill_nodes(char **args, int i)
