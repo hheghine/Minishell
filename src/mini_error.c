@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 17:44:04 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/27 03:22:23 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,35 @@ void	*mini_error(int errmsg, char *param, int errcode)
 		ft_putstr_fd("\033[0;33merror while looking for matching quote\n", 2);
 	ft_putendl_fd(param, 2);
 	return (NULL);
+}
+
+/****************************************************************************/
+/* The  opendir()  function  opens a directory stream corresponding to the  */
+/*        directory name, and returns a pointer to  the  directory  stream. */
+/*        The stream is positioned at the first entry in the directory.     */
+/****************************************************************************/
+
+// char **str -> HOME and cwd
+void	mini_cd_error(char **full_cmd, char **str)
+{
+	DIR	*dir;
+
+	dir = NULL;
+	if (full_cmd[1])
+		dir = opendir(full_cmd[1]);
+	if (!full_cmd[1] && *str && !str[0][0])
+	{
+		gstatus = 1;
+		print_error_msg_fd("HOME not set");
+	}
+	if (!full_cmd[1] && str[0])
+		gstatus = chdir(str[0]) < 0;
+	if (full_cmd[1] && dir && access(full_cmd[1], F_OK) != -1)
+		chdir(full_cmd[1]);
+	else if (full_cmd[1] && assess(full_cmd[1], F_OK) == -1)
+		mini_error(NDIR, full_cmd[1], 1);
+	else if (full_cmd[1])
+		mini_error(NOTDIR, full_cmd[1], 1);
+	if (full_cmd[1] && dir)
+		closedir(dir);
 }

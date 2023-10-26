@@ -6,11 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 17:37:26 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:29:24 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+extern int	gstatus;
 
 char **split_final(char **args, t_prompt *prompt)
 {
@@ -36,11 +38,15 @@ void	*parse_args(char **args, t_prompt *prompt)
 {
 	char	**splitted;
 	int		i;
-	int		exitcode;
+	bool	isexit;
 
-	exitcode = 0;
+	isexit = false;
 	splitted = split_final(args, prompt);
 	prompt->cmds = fill_nodes(splitted, -1);
+	if (!prompt->cmds)
+		return (prompt);
+	i = ft_lstsize(prompt->cmds);
+	// gstatus = mini_builtin(prompt, prompt->cmds, &isexit, 0);
 	//
 }
 

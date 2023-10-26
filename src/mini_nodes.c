@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/25 00:18:05 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/25 00:39:13 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ t_command	*init_t_command(void)
 	command->infile = STDIN_FILENO;
 	command->outfile = STDOUT_FILENO;
 	return (command);
+}
+
+t_command	*free_nodes(t_list *node, char **args, char **temp)
+{
+	ft_lstclear(&node, free_content);
+	ft_free_matrix(&args);
+	ft_free_matrix(&temp);
+	return (NULL);
 }
 
 static char	**trim_args(char **args)
@@ -68,14 +76,6 @@ static t_command	*cmd_parameters(t_command *cmd, char **args[2], int *i)
 	mini_error(EPIPEND, NULL, 2);
 	*i = -2;
 	return (cmd);
-}
-
-t_command	*free_nodes(t_list *node, char **args, char **temp)
-{
-	ft_lstclear(&node, free_content);
-	ft_free_matrix(&args);
-	ft_free_matrix(&temp);
-	return (NULL);
 }
 
 t_list	*fill_nodes(char **args, int i)
