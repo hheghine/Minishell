@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/27 03:34:57 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/28 02:17:25 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int			mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n);
 bool		is_builtin(t_command *cmd);
 /*************************mini_builtins1.c**************************/
 int			mini_cd(t_prompt *prompt);
+int			mini_echo(t_list *cmd);
+int			mini_pwd(void);
 /*******************************************************************/
 
 #endif

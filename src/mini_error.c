@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/27 03:22:23 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/28 00:38:16 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	*mini_error(int errmsg, char *param, int errcode)
 /* The  opendir()  function  opens a directory stream corresponding to the  */
 /*        directory name, and returns a pointer to  the  directory  stream. */
 /*        The stream is positioned at the first entry in the directory.     */
+/*                                                                          */
+/* DIR structure represents this directory stream. When you open a directory*/
+/* with opendir(), it returns a pointer to a DIR structure, which you can   */
+/* use to read the directory's contents.                                    */
 /****************************************************************************/
 
 // char **str -> HOME and cwd
