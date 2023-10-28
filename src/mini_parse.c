@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 02:26:26 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/28 22:20:55 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	*check_args(char *cmd, t_prompt *prompt)
 
 	if (!cmd || !ft_strncmp(cmd, "exit", 4))
 	{
-		printf("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n");
+		// printf("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n");
+		ft_putstr_fd("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
 		free(cmd);
 		return (NULL);
 	}

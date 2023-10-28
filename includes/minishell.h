@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 02:17:25 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:35:29 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,22 @@ t_command	*open_outfile1(t_command *node, char **args, int *i);
 t_command	*open_outfile2(t_command *node, char **args, int *i);
 t_command	*open_infile1(t_command *node, char **args, int *i);
 t_command	*open_infile2(t_command *node, char **args, int *i);
-/**************************mini_builtins.c**************************/
+/***************************mini_builtin1.c*************************/
 int			mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n);
 bool		is_builtin(t_command *cmd);
-/*************************mini_builtins1.c**************************/
+/**************************mini_builtin2.c**************************/
 int			mini_cd(t_prompt *prompt);
 int			mini_echo(t_list *cmd);
 int			mini_pwd(void);
+int			mini_exit(t_list *cmd, int *isexit);
+/**************************mini_builtin3.c**************************/
+int			mini_unset(t_prompt *prompt);
+int			mini_export(t_prompt *prompt);
+/****************************mini_exec1.c***************************/
+void		*exec_command(t_prompt *prompt, t_list *cmd);
+void		get_command(t_prompt *prompt, t_list *cmd);
+/***************************mini_exec2.c***************************/
+void		*mini_fork_check(t_prompt *prompt, t_list *cmd, int fd[2]);
 /*******************************************************************/
 
 #endif

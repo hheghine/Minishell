@@ -37,3 +37,30 @@ int	ft_atoi(const char *str)
 	}
 	return (res * neg);
 }
+
+int	ft_atoi_ext(const char *c, long *num)
+{
+	int	sign;
+	int	i;
+
+	*num = 0;
+	sign = 1;
+	i = 0;
+	while (c[i] == ' ' || (c[i] >= 9 && c[i] <= 13))
+		i++;
+	if (*c == '-')
+		sign *= -1;
+	if (*c == '-' || *c == '+')
+		c++;
+	if (!ft_isdigit(*c))
+		return (-1);
+	while (ft_isdigit(*c))
+	{
+		*num = 10 * *num + (*c - '0');
+		c++;
+	}
+	if (*c && !(c[i] == ' ' || (c[i] >= 9 && c[i] <= 13)))
+		return (-1);
+	*num *= sign;
+	return (0);
+}

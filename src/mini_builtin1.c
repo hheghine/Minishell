@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_bultin1.c                                     :+:      :+:    :+:   */
+/*   mini_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 02:18:14 by hbalasan         ###   ########.fr       */
+/*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
+/*   Updated: 2023/10/28 23:23:46 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,57 @@
 
 extern int	gstatus;
 
-int	mini_cd(t_prompt *prompt)
+bool	is_builtin(t_command *cmd)
 {
-	char	**full_cmd;
-	char	**str;
-	char	*temp;
+	int	len;
 
-	gstatus = 0;
-	full_cmd = ((t_command *)prompt->cmds->content)->full_cmd;
-	temp = get_env("HOME", prompt->envp, 4);
-	if (!temp)
-		temp = ft_strdup("");
-	str = ft_extend_matrix(NULL, temp);
-	free(temp);
-	temp = getcwd(NULL, 0);
-	str = ft_extend_matrix(str, temp);
-	free(temp);
-	mini_cd_error(full_cmd, str);
-	if (!gstatus)
-		prompt->envp = set_env("OLDPWD", str[1], prompt->envp);
-	temp = getcwd(NULL, 0);
-	if (!temp)
-		temp = ft_strdup("");
-	str = ft_extend_matrix(str, temp);
-	free(str);
-	prompt->envp = set_env("PWD", str[2], prompt->envp);
-	ft_free_matrix(&str);
-	return (gstatus);
+	if (!cmd->full_cmd)
+		return (false);
+	if (cmd->full_cmd && ft_strchr(cmd->full_cmd[0], '/') || \
+		ft_strchr(cmd->full_path, '/'))
+		return (false);
+	len = ft_strlen(cmd->full_cmd[0]);
+	if (!ft_strncmp(cmd->full_cmd[0], "cd", len) && len == 2)
+		return (true);
+	if (!ft_strncmp(cmd->full_cmd[0], "pwd", len) && len == 3)
+		return (true);
+	if (!ft_strncmp(cmd->full_cmd[0], "env", len) && len == 3)
+		return (true);
+	if (!ft_strncmp(cmd->full_cmd[0], "echo", len) && len == 4)
+		return (true);
+	if (!ft_strncmp(cmd->full_cmd[0], "exit", len) && len == 4)
+		return (true);
+	if (!ft_strncmp(cmd->full_cmd[0], "unset", len) && len == 5)
+		return (true);
+	if (!ft_strncmp(cmd->full_cmd[0], "export", len) && len == 6)
+		return (true);
+	return (false);
 }
 
-int	mini_echo(t_list *cmd)
+int	mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n)
 {
-	char		**full_cmd;
-	t_command	*node;
-	int			i;
-	bool		newline;
+	t_command	*c;
 
-	i = 0;
-	newline = 1;
-	node = cmd->content;
-	full_cmd = node->full_cmd;
-	while (full_cmd && full_cmd[++i])
+	while (cmd)
 	{
-		if (i == 1 && !ft_strncmp(full_cmd[i], "-n", 2) && \
-			ft_strlen(full_cmd[i]) == 2)
-			newline = 0;
+		c = cmd->content;
+		n = 0;
+		if (c && *c->full_cmd)
+			n = ft_strlen(*c->full_cmd);
+		if (c && *c->full_cmd && !ft_strncmp(*c->full_cmd, "exit", n) && n == 4)
+			gstatus = mini_exit(cmd, isexit);
+		else if (!cmd->next && c && !ft_strncmp(*c->full_cmd, "cd", n) && n == 2)
+			gstatus = mini_cd(prompt);
+		else if (!cmd->next && c && !ft_strncmp(*c->full_cmd, "unset", n) && n == 5)
+			gstatus = mini_unset(prompt);
+		else if (!cmd->next && c && !ft_strncmp(*c->full_cmd, "export", n) && n == 6)
+			gstatus = mini_export(prompt);
 		else
 		{
-			ft_putstr_fd(full_cmd[i], 1);
-			if (full_cmd[i + 1])
-				ft_putchar_fd(' ', 1);
+			//signal handling ??
+			exec_command(prompt, cmd);
 		}
+		cmd = cmd->next;
 	}
-	if (newline)
-		write(1, "\n", 1);
-	return (0);
-}
-
-// echo -n: this option is used to omit echoing trailing newline.
-int	mini_pwd(void)
-{
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	ft_putendl_fd(pwd, 1);
-	free(pwd);
-	return (0);
+	return (gstatus);
 }
