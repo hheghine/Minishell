@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:52:03 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:12:58 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ char	*find_command(char **env_path, char *cmd, char *full_path)
 		free(full_path);
 		return (NULL);
 	}
-	ft_free_matrix(&env_path);
+	// printf("%s\n", full_path);
 	return (full_path);
 }
 
-DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char **str, char *path)
+DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char ***str, char *path)
 {
 	DIR			*dir;
 	t_command	*node;
@@ -55,17 +55,17 @@ DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char **str, char *pat
 		dir = opendir(node->full_cmd[0]);
 	if (node && node->full_cmd && ft_strchr(node->full_cmd[0], '/') && !dir)
 	{
-		str = ft_split(node->full_cmd[0], '/');
+		*str = ft_split(node->full_cmd[0], '/');
 		node->full_path = ft_strdup(node->full_cmd[0]);
 		free(node->full_cmd[0]);
-		node->full_cmd[0] = ft_strdup(str[ft_matrixlen(str) - 1]);
+		node->full_cmd[0] = ft_strdup(*str[ft_matrixlen(*str) - 1]);
 	}
 	else if(!is_builtin(node) && node && node->full_cmd && !dir)
 	{
 		path = get_env("PATH", prompt->envp, 4);
-		str = ft_split(path, ':');
+		*str = ft_split(path, ':');
 		free(path);
-		node->full_path = find_command(str, node->full_cmd[0], node->full_path);
+		node->full_path = find_command(*str, node->full_cmd[0], node->full_path);
 		if (!node->full_cmd || !node->full_cmd[0] || !node->full_cmd[0][0])
 			mini_error(ECMD, node->full_cmd[0], 127);
 	}
@@ -83,7 +83,7 @@ void	get_command(t_prompt *prompt, t_list *cmd)
 	str = NULL;
 	path = NULL;
 	node = cmd->content;
-	dir = command_and_path_check(prompt, cmd, str, path);
+	dir = command_and_path_check(prompt, cmd, &str, path);
 	if (!is_builtin(node) && node && node->full_cmd && dir)
 		mini_error(ISDIR, node->full_cmd[0], 126);
 	else if (!is_builtin(node) && node && node->full_path && \

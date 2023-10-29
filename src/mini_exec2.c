@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:46:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:04:37 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:20:24 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	*this_is_childprocess(t_prompt *prompt, t_list *cmd, int fd[2])
 	node = cmd->content;
 	len = 0;
 	if (node->full_cmd)
+	{
+		// printf("%s\n", node->full_cmd[0]);
 		len = ft_strlen(node->full_cmd[0]);
+	}
 	childprocess_io(cmd, node, fd);
 	close(fd[READ_END]);
 	this_is_childbuiltin(cmd, node, prompt->envp, len);
@@ -91,11 +94,12 @@ void	*mini_fork_check(t_prompt *prompt, t_list *cmd, int fd[2])
 
 	dir = NULL;
 	node = cmd->content;
+	// printf("%s\n", node->full_cmd[0]);
 	if (node->full_cmd)
 		dir = opendir(node->full_cmd[0]);
 	if (node->infile == -1 || node->outfile == -1)
 		return (NULL);
-	if (is_builtin(node) || node->full_cmd && access(node->full_cmd[0], X_OK) == 0) // is builtin or executable
+	if (is_builtin(node) || node->full_path && access(node->full_path, X_OK) == 0) // is builtin or executable
 		execute(prompt, cmd, fd);
 	else if (!is_builtin(node) && ((node->full_cmd && \
 		access(node->full_cmd[0], F_OK) == 0) || dir)) // is a directory
