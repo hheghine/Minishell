@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:26:18 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:52:03 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*find_command(char **env_path, char *cmd, char *full_path)
 		free(full_path);
 		return (NULL);
 	}
+	ft_free_matrix(&env_path);
 	return (full_path);
 }
 
