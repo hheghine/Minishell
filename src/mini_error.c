@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 00:38:16 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:03:12 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	mini_cd_error(char **full_cmd, char **str)
 		gstatus = chdir(str[0]) < 0;
 	if (full_cmd[1] && dir && access(full_cmd[1], F_OK) != -1)
 		chdir(full_cmd[1]);
-	else if (full_cmd[1] && assess(full_cmd[1], F_OK) == -1)
+	else if (full_cmd[1] && access(full_cmd[1], F_OK) == -1)
 		mini_error(NDIR, full_cmd[1], 1);
 	else if (full_cmd[1])
 		mini_error(NOTDIR, full_cmd[1], 1);

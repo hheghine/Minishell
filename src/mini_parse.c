@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 22:20:55 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:12:04 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,22 @@ void	*parse_args(char **args, t_prompt *prompt)
 		return (prompt);
 	i = ft_lstsize(prompt->cmds);
 	gstatus = mini_builtin(prompt, prompt->cmds, &isexit, 0);
-	//
+	while (--i > 0)
+		wait(&gstatus);
+	if (!isexit || gstatus == 3) // corresponds to my NOTDIR
+		gstatus = 0;
+	if (isexit && args)
+	{
+		ft_lstclear(&prompt->cmds, free_content);
+		return (NULL);
+	}
+	return (prompt);
 }
 
 void	*check_args(char *cmd, t_prompt *prompt)
 {
 	char		**trim;
-	t_command	command;
+	t_command	*command;
 
 	if (!cmd || !ft_strncmp(cmd, "exit", 4))
 	{
@@ -69,6 +78,13 @@ void	*check_args(char *cmd, t_prompt *prompt)
 		return ("");
 	free(cmd);
 	prompt = parse_args(trim, prompt);
-	//
-	return ("a"); // temporary
+	if (prompt && prompt->cmds)
+		command = prompt->cmds->content;
+	if (prompt && prompt->cmds && command && command->full_cmd \
+		&& ft_lstsize(prompt->cmds) == 1)
+		prompt->envp = set_env("_", \
+		command->full_cmd[ft_matrixlen(command->full_cmd) - 1],prompt->envp);
+	if (prompt && prompt->cmds)
+		ft_lstclear(&prompt->cmds, free_content);
+	return (prompt);
 }

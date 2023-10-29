@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_builtin1.c                                    :+:      :+:    :+:   */
+/*   mini_builtin2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 23:20:21 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:02:25 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	mini_pwd(void)
 	return (0);
 }
 
-int	mini_exit(t_list *cmd, int *isexit)
+int	mini_exit(t_list *cmd, bool *isexit)
 {
 	t_command	*node;
 	long		status[2];

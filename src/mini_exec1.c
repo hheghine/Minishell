@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/29 01:53:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:03:18 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,16 @@ void	*exec_command(t_prompt *prompt, t_list *cmd)
 	get_command(prompt, cmd);
 	if (pipe(fd) < 0)
 		return (mini_error(EPIPE, NULL, 1));
-	
+	if (!mini_fork_check(prompt, cmd, fd))
+		return (NULL);
+	close (fd[WRITE_END]);
+	if (cmd->next && ((t_command *)cmd->next->content)->infile == STDIN_FILENO)
+		((t_command *)cmd->next->content)->infile = fd[READ_END];
+	else
+		close(fd[READ_END]);
+	if (((t_command *)cmd->content)->infile > 2) // not standard IN, OUT, or ERROR
+		close(((t_command *)cmd->content)->infile);
+	if (((t_command *)cmd->content)->outfile > 2) // not standard IN, OUT, or ERROR
+		close(((t_command *)cmd->content)->outfile);
+	return (NULL);
 }

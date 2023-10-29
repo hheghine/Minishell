@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/25 00:39:13 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:11:44 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_command	*init_t_command(void)
 	return (command);
 }
 
-t_command	*free_nodes(t_list *node, char **args, char **temp)
+void	*free_nodes(t_list *node, char **args, char **temp)
 {
 	ft_lstclear(&node, free_content);
 	ft_free_matrix(&args);
@@ -92,12 +92,12 @@ t_list	*fill_nodes(char **args, int i)
 		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
 		{
 			i += (args[i][0] == '|');
-			ft_lstadd_back(&nodes[0], ft_lstnew(mini_init()));
+			ft_lstadd_back(&nodes[0], ft_lstnew(init_t_command()));
 			nodes[1] = ft_lstlast(nodes[0]);
 		}
 		nodes[1]->content = cmd_parameters(nodes[1]->content, temp, &i);
 		if (i < 0)
-			return (free_nodes(nodes[0], args, temp));
+			return (free_nodes(nodes[0], args, temp[1]));
 		if (!args[i])
 			break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/29 01:37:55 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:03:00 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	mini_unset(t_prompt *prompt)
 			free(arg[i[0]]);
 			arg[i[0]] = temp;
 			if (find_from_envp(arg[i[0]], prompt->envp, i))
-				ft_matrix_replace(prompt->envp, NULL, i[1]);
+				ft_matrix_replace(&prompt->envp, NULL, i[1]);
 		}
 	}
 	return (0);
@@ -63,7 +63,7 @@ int	mini_export(t_prompt *prompt)
 		i[0] = 1;
 		while (arg[i[0]])
 		{
-			flag = find_from_envp(arg[i[0]], prompt->envp, i[2]);
+			flag = find_from_envp(arg[i[0]], prompt->envp, i);
 			if (flag)
 			{
 				free(prompt->envp[i[1]]);

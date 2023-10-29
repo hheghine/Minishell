@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_builtin.c                                     :+:      :+:    :+:   */
+/*   mini_builtin1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 23:23:46 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:13:54 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	is_builtin(t_command *cmd)
 	if (!cmd->full_cmd)
 		return (false);
 	if (cmd->full_cmd && ft_strchr(cmd->full_cmd[0], '/') || \
-		ft_strchr(cmd->full_path, '/'))
+		cmd->full_path && ft_strchr(cmd->full_path, '/'))
 		return (false);
 	len = ft_strlen(cmd->full_cmd[0]);
 	if (!ft_strncmp(cmd->full_cmd[0], "cd", len) && len == 2)
@@ -61,7 +61,7 @@ int	mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n)
 			gstatus = mini_export(prompt);
 		else
 		{
-			//signal handling ??
+			// signal handling ?? to ignore ??
 			exec_command(prompt, cmd);
 		}
 		cmd = cmd->next;
