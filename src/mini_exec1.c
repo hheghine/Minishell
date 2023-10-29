@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 01:12:58 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 02:00:09 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char ***str, char *pa
 		*str = ft_split(path, ':');
 		free(path);
 		node->full_path = find_command(*str, node->full_cmd[0], node->full_path);
-		if (!node->full_cmd || !node->full_cmd[0] || !node->full_cmd[0][0])
+		if (!node->full_path || !node->full_cmd[0] || !node->full_cmd[0][0])
 			mini_error(ECMD, node->full_cmd[0], 127);
 	}
 	return (dir);
@@ -87,11 +87,11 @@ void	get_command(t_prompt *prompt, t_list *cmd)
 	if (!is_builtin(node) && node && node->full_cmd && dir)
 		mini_error(ISDIR, node->full_cmd[0], 126);
 	else if (!is_builtin(node) && node && node->full_path && \
-		access(node->full_path, F_OK) == -1)
-		mini_error(NDIR, node->full_path, 127);
-	else if (!is_builtin(node) && node && node->full_path && \
 		access(node->full_path, X_OK) == -1)
 		mini_error(EPERM, node->full_path, 126);
+	else if (!is_builtin(node) && node && node->full_path && \
+		access(node->full_path, F_OK) == -1)
+		mini_error(NDIR, node->full_path, 127);
 	if (dir)
 		closedir(dir);
 	ft_free_matrix(&str);

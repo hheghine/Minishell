@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 00:40:21 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 02:42:01 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:44:26 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ char	*get_exp_var(char *s, t_prompt *prompt, int i)
 	if (!var && s[i] == '$')
 		var = ft_itoa(prompt->pid);
 	else if (!var && s[i] == '?')
+	{
+		// printf("%d\n", gstatus);
 		var = ft_itoa(gstatus);
+	}
 	path = ft_strjoin(expanded, var);
 	free(expanded);
 	expanded = ft_strjoin(path, &s[i + pos]);

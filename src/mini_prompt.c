@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:31:27 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 16:50:12 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:25:11 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ char	*get_prompt(t_prompt prompt)
 	temp = ft_strjoin(temp1, temp2);
 	free(temp1);
 	free(temp2);
-	// if (!gstatus || gstatus == -1)
+	if (!gstatus || gstatus == -1)
 		temp1 = ft_strjoin(temp, "> ");
-	// else
-	// 	temp1 = ft_strjoin(temp, "\033[1;33m> ");
+	else
+		temp1 = ft_strjoin(temp, "\033[1;33m> ");
 	free(temp);
 	temp2 = ft_strjoin(temp1, DEFAULT);
 	free(temp1);
