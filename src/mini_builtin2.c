@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:02:25 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:17:09 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	mini_cd(t_prompt *prompt)
 	if (!temp)
 		temp = ft_strdup("");
 	str = ft_extend_matrix(str, temp);
-	free(str);
+	free(temp);
 	prompt->envp = set_env("PWD", str[2], prompt->envp);
 	ft_free_matrix(&str);
 	return (gstatus);

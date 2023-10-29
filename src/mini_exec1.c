@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:03:18 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:26:18 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	get_command(t_prompt *prompt, t_list *cmd)
 		mini_error(EPERM, node->full_path, 126);
 	if (dir)
 		closedir(dir);
-	free(str);
+	ft_free_matrix(&str);
 }
 
 void	*exec_command(t_prompt *prompt, t_list *cmd)

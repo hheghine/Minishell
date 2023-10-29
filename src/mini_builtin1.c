@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:13:54 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:48:38 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ bool	is_builtin(t_command *cmd)
 int	mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n)
 {
 	t_command	*c;
-
+	
 	while (cmd)
 	{
 		c = cmd->content;
 		n = 0;
-		if (c && *c->full_cmd)
+		if (c && c->full_cmd && *c->full_cmd)
 			n = ft_strlen(*c->full_cmd);
-		if (c && *c->full_cmd && !ft_strncmp(*c->full_cmd, "exit", n) && n == 4)
+		if (c && c->full_cmd && *c->full_cmd && !ft_strncmp(*c->full_cmd, "exit", n) && n == 4)
 			gstatus = mini_exit(cmd, isexit);
-		else if (!cmd->next && c && !ft_strncmp(*c->full_cmd, "cd", n) && n == 2)
+		else if (!cmd->next && c && c->full_cmd && !ft_strncmp(*c->full_cmd, "cd", n) && n == 2)
 			gstatus = mini_cd(prompt);
-		else if (!cmd->next && c && !ft_strncmp(*c->full_cmd, "unset", n) && n == 5)
+		else if (!cmd->next && c && c->full_cmd && !ft_strncmp(*c->full_cmd, "unset", n) && n == 5)
 			gstatus = mini_unset(prompt);
-		else if (!cmd->next && c && !ft_strncmp(*c->full_cmd, "export", n) && n == 6)
+		else if (!cmd->next && c && c->full_cmd && !ft_strncmp(*c->full_cmd, "export", n) && n == 6)
 			gstatus = mini_export(prompt);
 		else
 		{
