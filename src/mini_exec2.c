@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:46:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 01:20:24 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:07:08 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	execute(t_prompt *prompt, t_list *cmd, int fd[2])
 	}
 	else if (id == 0)
 		this_is_childprocess(prompt, cmd, fd); // THIS IS SEMPITERNAL! WILL WE EVER SEE THE END?!
+	// wait(&gstatus);
 }
 
 void	*mini_fork_check(t_prompt *prompt, t_list *cmd, int fd[2])
