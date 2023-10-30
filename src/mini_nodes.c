@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:11:44 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:26:17 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static t_command	*cmd_parameters(t_command *cmd, char **args[2], int *i)
 {
 	if (args[0][*i])
 	{
+		// printf("%s %d\n", *args[1], *i);
 		if (args[0][*i][0] == '>' && args[0][*i + 1] && args[0][*i + 1][0] == '>')
 			cmd = open_outfile2(cmd, args[1], i);
 		else if (args[0][*i][0] == '>')

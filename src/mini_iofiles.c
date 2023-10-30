@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 04:06:25 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/24 05:32:32 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:49:27 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,23 @@ t_command	*open_outfile1(t_command *node, char **args, int *i)
 	flags[0] = 1;
 	flags[1] = 0;
 	(*i)++;
-	if (args[++(*i)])
+	// for (int i = 0; args[i]; i++)
+	// {
+	// 	printf("i: %d\n", i);
+	// 	printf("%s\n", args[i]);
+	// }
+	if (args && args[(*i)])
 		node->outfile = get_fd(node->outfile, args[*i], flags);
-	if (!args[*i] || node->outfile == -1)
+	else if (!args[(*i)] || node->outfile == -1)
 	{
 		*i = -1;
-		if (node->outfile == -1)
+		if (node->outfile == -1) // !args[*i]
+			gstatus = 1;
+		else
 		{
 			print_error_msg_fd("syntax error near unexpected token `newline'");
-			gstatus = 2;
+			gstatus = 2;	
 		}
-		else
-			gstatus = 1;
 	}
 	return (node);
 }
@@ -50,12 +55,12 @@ t_command	*open_outfile2(t_command *node, char **args, int *i)
 	{
 		*i = -1;
 		if (node->outfile == -1)
+			gstatus = 1;
+		else
 		{
 			print_error_msg_fd("syntax error near unexpected token `newline'");
 			gstatus = 2;
 		}
-		else
-			gstatus = 1;
 	}
 	return (node);
 }
