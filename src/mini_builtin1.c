@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 20:09:32 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:54:14 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	is_builtin(t_command *cmd)
 	return (false);
 }
 
-int	mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n)
+int	mini_builtin(t_prompt *prompt, t_list *cmd, int *isexit, int n)
 {
 	t_command	*c;
 	
@@ -61,7 +61,7 @@ int	mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n)
 			gstatus = mini_export(prompt);
 		else
 		{
-			// signal handling ?? to ignore ??
+			sigaction_handler2();
 			exec_command(prompt, cmd);
 		}
 		cmd = cmd->next;

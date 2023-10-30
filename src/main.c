@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 16:48:21 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:50:04 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **env)
 	init_prompt(&prompt, argv, env);
 	while (1)
 	{
-		sigaction_handler();
+		sigaction_handler1();
 		// signal(SIGINT, handle_sigint);
 		// signal(SIGQUIT, SIG_IGN);
 		str = get_prompt(prompt);

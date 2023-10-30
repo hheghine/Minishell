@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 20:08:35 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:33:29 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	*parse_args(char **args, t_prompt *prompt)
 {
 	char	**splitted;
 	int		i;
-	bool	isexit;
+	int		isexit;
 
-	isexit = false;
+	isexit = 0;
 	splitted = split_final(args, prompt);
 	prompt->cmds = fill_nodes(splitted, -1);
 	if (!prompt->cmds)
@@ -52,7 +52,7 @@ void	*parse_args(char **args, t_prompt *prompt)
 		wait(&gstatus);
 	}
 	// if (!isexit || gstatus == 3) // 3 - corresponds to my NOTDIR
-	if (gstatus == 3 || gstatus == 13) // 13 - for cat
+	if (!isexit && (gstatus == 3 || gstatus == 13)) // 13 - for cat
 		gstatus = 0;
 	if (gstatus > 255)
 		gstatus %= 255;
@@ -69,9 +69,8 @@ void	*check_args(char *cmd, t_prompt *prompt)
 	char		**trim;
 	t_command	*command;
 
-	if (!cmd || !ft_strncmp(cmd, "exit", 4))
+	if (!cmd)
 	{
-		// printf("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n");
 		ft_putstr_fd("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
 		free(cmd);
 		return (NULL);

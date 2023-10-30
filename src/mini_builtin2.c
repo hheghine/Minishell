@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:17:09 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:38:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,31 @@ int	mini_cd(t_prompt *prompt)
 // echo -n: this option is used to omit echoing trailing newline.
 int	mini_echo(t_list *cmd)
 {
-	char		**full_cmd;
 	t_command	*node;
-	int			i;
-	bool		newline;
+	char		**fullcmd;
+	int			newline;
+	int			i[2];
 
-	i = 0;
-	newline = 1;
 	node = cmd->content;
-	full_cmd = node->full_cmd;
-	while (full_cmd && full_cmd[++i])
+	fullcmd = node->full_cmd;
+	i[0] = 0;
+	i[1] = 0;
+	newline = 1;
+	while (fullcmd && fullcmd[++i[0]])
 	{
-		if (i == 1 && !ft_strncmp(full_cmd[i], "-n", 2) && \
-			ft_strlen(full_cmd[i]) == 2)
+		if (!i[1] && !ft_strncmp(fullcmd[i[0]], "-n", 2) && \
+			(ft_charcount(fullcmd[i[0]], 'n') == \
+			(int)(ft_strlen(fullcmd[i[0]]) - 1)))
 			newline = 0;
 		else
 		{
-			ft_putstr_fd(full_cmd[i], 1);
-			if (full_cmd[i + 1])
+			i[1] = 1;
+			ft_putstr_fd(fullcmd[i[0]], 1);
+			if (fullcmd[i[0] + 1])
 				ft_putchar_fd(' ', 1);
 		}
 	}
-	if (newline)
-		write(1, "\n", 1);
-	return (0);
+	return (write(1, "\n", newline) == 2);
 }
 
 int	mini_pwd(void)
@@ -82,7 +83,7 @@ int	mini_pwd(void)
 	return (0);
 }
 
-int	mini_exit(t_list *cmd, bool *isexit)
+int	mini_exit(t_list *cmd, int *isexit)
 {
 	t_command	*node;
 	long		status[2];
@@ -93,7 +94,7 @@ int	mini_exit(t_list *cmd, bool *isexit)
 		ft_putstr_fd("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
 	if (!node->full_cmd || !node->full_cmd[1]) // if there is no second argument after the "exit" command
 		return (0);
-	status[0] = ft_atoi_ext(node->full_cmd[1], &status[0]);
+	status[0] = ft_atoi_ext(node->full_cmd[1], &status[1]);
 	if (status[0] == -1)
 	{
 		print_error_msg_fd("exit: ");
@@ -110,4 +111,3 @@ int	mini_exit(t_list *cmd, bool *isexit)
 	status[1] = (status[1] % 256) + 256 * (status[1] < 0); // range [0, 255] as exit statuses are typically limited to 8 bits
 	return (status[1]);
 }
-

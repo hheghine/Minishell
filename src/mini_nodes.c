@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 19:26:17 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:57:09 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_list	*fill_nodes(char **args, int i)
 		nodes[1] = ft_lstlast(nodes[0]);
 		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
 		{
-			i += (args[i][0] == '|');
+			i += (args[i][0] == '|'); // (args[i][0] == '<' && args[i][1] && args[i][1] == '<')
 			ft_lstadd_back(&nodes[0], ft_lstnew(init_t_command()));
 			nodes[1] = ft_lstlast(nodes[0]);
 		}

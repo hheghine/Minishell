@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:11:09 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 02:20:35 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ typedef struct s_command
 }			t_command;
 
 /***************************mini_signal.c***************************/
-void		sigaction_handler(void);
+void		sigaction_handler1(void);
+void    	sigaction_handler2(void);
+void    	sigaction_handler3(void);
 void		handle_sigint(int sig);
 /*****************************mini_env.c****************************/
 char		**set_env(char *var, char *value, char **envp);
@@ -86,13 +88,13 @@ t_command	*open_infile2(t_command *node, char **args, int *i);
 /***************************mini_heredoc.c**************************/
 int			mini_here_doc(char *str[2], char *temp);
 /***************************mini_builtin1.c*************************/
-int			mini_builtin(t_prompt *prompt, t_list *cmd, bool *isexit, int n);
+int			mini_builtin(t_prompt *prompt, t_list *cmd, int *isexit, int n);
 bool		is_builtin(t_command *cmd);
 /**************************mini_builtin2.c**************************/
 int			mini_cd(t_prompt *prompt);
 int			mini_echo(t_list *cmd);
 int			mini_pwd(void);
-int			mini_exit(t_list *cmd, bool *isexit);
+int			mini_exit(t_list *cmd, int *isexit);
 /**************************mini_builtin3.c**************************/
 int			mini_unset(t_prompt *prompt);
 int			mini_export(t_prompt *prompt);

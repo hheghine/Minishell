@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:46:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 20:18:44 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:59:06 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int	gstatus;
 
 void	this_is_childbuiltin(t_list *cmd, t_command *node, char **envp, int len)
 {
-	// signal handling ?? to default ??
+	sigaction_handler3();
 	// write (2, "\033[1;33m⚠ minishell: \033[0;33m", ft_strlen("\033[1;33m⚠ minishell: \033[0;33m"));
 	if (!is_builtin(node) && node->full_cmd)
 		execve(node->full_path, node->full_cmd, envp);
@@ -103,8 +103,8 @@ void	*mini_fork_check(t_prompt *prompt, t_list *cmd, int fd[2])
 		return (NULL);
 	if (is_builtin(node) || node->full_path && access(node->full_path, X_OK) == 0) // is builtin or executable
 		execute(prompt, cmd, fd);
-	else if (!is_builtin(node) && ((node->full_cmd && \
-		access(node->full_cmd[0], F_OK) == 0) || dir)) // is a directory
+	else if (!is_builtin(node) && ((node->full_path && \
+		access(node->full_path, F_OK) == 0) || dir)) // is a directory
 		gstatus = 126;
 	else if (!is_builtin(node) && node->full_cmd) // command not found
 		gstatus = 127;

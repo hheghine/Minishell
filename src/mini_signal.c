@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:00:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/23 16:48:34 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:53:29 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	gstatus;
 //     void (*sa_restorer)(void);    // Not used in modern systems, reserved for future use
 // };
 
-void sigaction_handler(void)
+void sigaction_handler1(void)
 {
     struct sigaction sa;
 
@@ -32,6 +32,34 @@ void sigaction_handler(void)
     if (sigaction(SIGINT, &sa, NULL) == -1)
         error_msg("Error setting up SIGINT handler");
     sa.sa_handler = SIG_IGN; // maybe i don't need this one
+    if (sigaction(SIGQUIT, &sa, NULL) == -1)
+        error_msg("Error setting up SIGQUIT handler");
+}
+
+void    sigaction_handler2(void)
+{
+    struct sigaction sa;
+
+    sa.sa_handler = SIG_IGN;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    if (sigaction(SIGINT, &sa, NULL) == -1)
+        error_msg("Error setting up SIGINT handler");
+    sa.sa_handler = SIG_IGN;
+    if (sigaction(SIGQUIT, &sa, NULL) == -1)
+        error_msg("Error setting up SIGQUIT handler");
+}
+
+void    sigaction_handler3(void)
+{
+    struct sigaction sa;
+
+    sa.sa_handler = SIG_DFL;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    if (sigaction(SIGINT, &sa, NULL) == -1)
+        error_msg("Error setting up SIGQUIT handler");
+    sa.sa_handler = SIG_DFL;
     if (sigaction(SIGQUIT, &sa, NULL) == -1)
         error_msg("Error setting up SIGQUIT handler");
 }

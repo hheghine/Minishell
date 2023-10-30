@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 00:36:18 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 02:24:13 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*here_doc(char *str[2], char *limiter, char *warning, uint64_t len)
 		str[0] = readline("\033[0;35m> \033[0m");
 		if (!str[0])
 		{
-			printf("\033[0;35m%s (wanted `%s\')\033[0m\n", warning, limiter);
+			printf("\033[1;35mminishell: \033[0;35m%s (wanted `%s\')\033[0m\n", warning, limiter);
 			break ;
 		}
 		temp = str[0];
@@ -45,7 +45,7 @@ int	mini_here_doc(char *str[2], char *temp)
 	int	fd[2];
 
 	gstatus = 0;
-	if (pipe(fd) == -1)
+	if (pipe(fd) < 0)
 	{
 		mini_error(EPIPE, NULL, 1);
 		return (-1);
