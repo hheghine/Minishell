@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 19:16:19 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:08:35 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ void	*parse_args(char **args, t_prompt *prompt)
 	i = ft_lstsize(prompt->cmds);
 	gstatus = mini_builtin(prompt, prompt->cmds, &isexit, 0);
 	while (--i >= 0)
+	{
 		wait(&gstatus);
+	}
 	// if (!isexit || gstatus == 3) // 3 - corresponds to my NOTDIR
 	if (gstatus == 3 || gstatus == 13) // 13 - for cat
 		gstatus = 0;
+	if (gstatus > 255)
+		gstatus %= 255;
 	if (isexit && args)
 	{
 		ft_lstclear(&prompt->cmds, free_content);

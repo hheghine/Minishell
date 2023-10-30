@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 02:00:09 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:57:00 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char ***str, char *pa
 	node = cmd->content;
 	if (node && node->full_cmd)
 		dir = opendir(node->full_cmd[0]);
-	if (node && node->full_cmd && ft_strchr(node->full_cmd[0], '/') && !dir)
+	if (str && *str && node && node->full_cmd && ft_strchr(node->full_cmd[0], '/') \
+		&& !dir)
 	{
 		*str = ft_split(node->full_cmd[0], '/');
 		node->full_path = ft_strdup(node->full_cmd[0]);

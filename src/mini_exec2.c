@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:46:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 19:07:08 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:18:44 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ extern int	gstatus;
 void	this_is_childbuiltin(t_list *cmd, t_command *node, char **envp, int len)
 {
 	// signal handling ?? to default ??
+	// write (2, "\033[1;33m⚠ minishell: \033[0;33m", ft_strlen("\033[1;33m⚠ minishell: \033[0;33m"));
 	if (!is_builtin(node) && node->full_cmd)
 		execve(node->full_path, node->full_cmd, envp);
 	else if (is_builtin(node) && node->full_cmd && \
