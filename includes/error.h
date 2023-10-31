@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 01:53:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/28 00:22:11 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 02:43:20 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_error
 /************************mini_error.c************************/
 void	error_msg(char *msg);
 void	*mini_error(int errmsg, char *param, int errcode);
-void	print_error_msg_fd(char *msg);
+void	print_error_msg_fd(char *msg, int nl);
 void	mini_cd_error(char **full_cmd, char **str);
 /************************************************************/
 

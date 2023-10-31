@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 01:38:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:46:05 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,14 @@ int	mini_exit(t_list *cmd, int *isexit)
 	node = cmd->content;
 	*isexit = !(cmd->next);
 	if (*isexit)
-		ft_putstr_fd("\033[1;35mexit⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
+		ft_putstr_fd("\033[0;35mexit\033[1;36m⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
 	if (!node->full_cmd || !node->full_cmd[1]) // if there is no second argument after the "exit" command
 		return (0);
 	status[0] = ft_atoi_ext(node->full_cmd[1], &status[1]);
 	if (status[0] == -1)
 	{
-		print_error_msg_fd("exit: ");
+		print_error_msg_fd("exit: ", 0);
+		ft_putstr_fd("\033[1;33m", 2);
 		ft_putstr_fd(node->full_cmd[1], 2);
 		ft_putstr_fd("\033[0;33m: numeric argument required\033[0m\n", 2);
 		return (255);
@@ -105,7 +106,7 @@ int	mini_exit(t_list *cmd, int *isexit)
 	else if (node->full_cmd[2])
 	{
 		*isexit = 0;
-		print_error_msg_fd("exit: too many arguments\n");
+		print_error_msg_fd("exit: too many arguments\n", 1);
 		return (1);
 	}
 	status[1] = (status[1] % 256) + 256 * (status[1] < 0); // range [0, 255] as exit statuses are typically limited to 8 bits

@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 01:58:43 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 02:43:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	error_msg(char *msg)
 	exit (1);
 }
 
-void	print_error_msg_fd(char *msg)
+void	print_error_msg_fd(char *msg, int nl)
 {
 	ft_putstr_fd("\033[1;33m⚠ minishell: \033[0;33m", 2);
 	ft_putstr_fd(msg, 2);
-	ft_putendl_fd(DEFAULT, 2);
+	if (nl)
+		ft_putendl_fd(DEFAULT, 2);
 }
 
 static void	set_status(int errcode)
@@ -83,7 +84,7 @@ void	mini_cd_error(char **full_cmd, char **str)
 	if (!full_cmd[1] && *str && !str[0][0])
 	{
 		gstatus = 1;
-		print_error_msg_fd("HOME not set");
+		print_error_msg_fd("HOME not set", 1);
 	}
 	if (!full_cmd[1] && str[0])
 		gstatus = chdir(str[0]) < 0;

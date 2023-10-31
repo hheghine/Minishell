@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 04:06:25 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 02:22:03 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/10/31 02:44:07 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_command	*open_outfile1(t_command *node, char **args, int *i)
 			gstatus = 1;
 		else
 		{
-			print_error_msg_fd("syntax error near unexpected token `newline'");
+			print_error_msg_fd("syntax error near unexpected token `newline'", 1);
 			gstatus = 2;	
 		}
 	}
@@ -58,7 +58,7 @@ t_command	*open_outfile2(t_command *node, char **args, int *i)
 			gstatus = 1;
 		else
 		{
-			print_error_msg_fd("syntax error near unexpected token `newline'");
+			print_error_msg_fd("syntax error near unexpected token `newline'", 1);
 			gstatus = 2;
 		}
 	}
@@ -79,7 +79,7 @@ t_command	*open_infile1(t_command *node, char **args, int *i)
 		*i = -1;
 		if (node->infile != -1)
 		{
-			print_error_msg_fd("syntax error near unexpected token `newline'");
+			print_error_msg_fd("syntax error near unexpected token `newline'", 1);
 			gstatus = 2;
 		}
 		else
@@ -106,7 +106,7 @@ t_command	*open_infile2(t_command *node, char **args, int *i)
 		*i = -1;
 		if (node->infile != -1)
 		{
-			print_error_msg_fd("syntax error near unexpected token `newline'");
+			print_error_msg_fd("syntax error near unexpected token `newline'", 1);
 			gstatus = 2;
 		}
 	}
