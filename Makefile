@@ -1,5 +1,7 @@
 NAME			= minishell
 
+PLATFORM		= $(shell uname -s)
+
 PURPLE			:= \033[0;34m
 PINK			:= \033[0;35m
 RESET			:= \033[0m
@@ -14,7 +16,7 @@ CC				= cc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g
 #LIBFLAGS		= -lreadline
-LIBFLAGS		= -Llib/readline/lib -lreadline -lhistory
+LIBFLAGS		= -Llibraries/readline-8.1/ -lreadline -lhistory
 
 ifeq ($(PLATFORM), Linux)
 	LFLAGS	+=	-ltinfo
