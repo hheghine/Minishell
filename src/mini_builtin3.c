@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 15:57:58 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:10:46 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	find_from_envp(char *var, char **envp, int i[2])
 	j = ft_strlen(var);
 	while (envp[i[1]])
 	{
-		if (!strncmp(envp[i[1]], var, j))
+		if (!ft_strncmp(envp[i[1]], var, j))
 			return (true);
 		i[1]++;
 	}
