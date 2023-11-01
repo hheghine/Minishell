@@ -77,6 +77,8 @@ char	**ft_extend_matrix(char **in, char *newstr);
 /*Replaces n-th line with another matrix*/
 char	**ft_matrix_replace(char ***big, char **small, int n);
 void	ft_printmatrix_fd(char **matrix, int fd);
+void	ft_matrixline_swap(char **m, int i, int j);
+char	**ft_alphabetical_matrix(char **m);
 /* Searches for the first occurrence of a character in a string and returns
 the index of that character in the string, or -1 if the character is not found */
 int		ft_strchr_idx(const char *s, int c);

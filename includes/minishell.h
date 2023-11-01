@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 02:20:35 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:55:27 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int			mini_pwd(void);
 int			mini_exit(t_list *cmd, int *isexit);
 /**************************mini_builtin3.c**************************/
 int			mini_unset(t_prompt *prompt);
-int			mini_export(t_prompt *prompt);
+// int			mini_export(t_prompt *prompt);
+int	mini_export(t_prompt *prompt, t_list *cmd);
 /****************************mini_exec1.c***************************/
 void		*exec_command(t_prompt *prompt, t_list *cmd);
 void		get_command(t_prompt *prompt, t_list *cmd);

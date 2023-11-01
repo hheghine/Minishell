@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 01:54:14 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:58:07 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	mini_builtin(t_prompt *prompt, t_list *cmd, int *isexit, int n)
 		else if (!cmd->next && c && c->full_cmd && !ft_strncmp(*c->full_cmd, "unset", n) && n == 5)
 			gstatus = mini_unset(prompt);
 		else if (!cmd->next && c && c->full_cmd && !ft_strncmp(*c->full_cmd, "export", n) && n == 6)
-			gstatus = mini_export(prompt);
+			gstatus = mini_export(prompt, cmd);
 		else
 		{
 			sigaction_handler2();
