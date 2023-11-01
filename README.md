@@ -1,8 +1,10 @@
 # Minishell
 
-![Starry](https://github.com/hheghine/Minishell/assets/119530584/cc74c604-ed69-4a13-816b-2308c44e2da0)
+A Unix shell is a command-line interpreter or shell that provides a command line user interface for Unix-like operating systems. The shell is both an interactive command language and a scripting language, and is used by the operating system to control the execution of the system using shell scripts.<br><br>
+This project is about creating a simple shell.
 
----
+![Screenshot from 2023-11-01 20-49-42](https://github.com/hheghine/Minishell/assets/119530584/fa39634e-f419-4e76-a36c-062f01b81a75)
+
 ## What Is Bash and How Does It Work?
 
 The shell is a program that that takes keyboard commands and passes them to the operating system to carry out. Almost all Linux distributions supply a shell program from the GNU Project called [Bash](https://www.gnu.org/software/bash/manual/bash.html). The name is an acronym for "Bourne-again shell," in reference to the fact that Bash is an enhanced replacement for "sh," the original Unix shell program written by Steve Bourne.
@@ -14,10 +16,12 @@ The general idea for this shell is reading a string of commands in a prompt usin
 ## The Challenge
 
 - Follow the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html).
-- Display a promt while waiting for a new commmand.
-- Have a working history.
-- Find and launch executables (using the PATH variable or an absolute path).
-- Handle `'` (single) and `"` (double) quotes like in bash.
+- Not use more than one global variable.
+- Display a **promt** while waiting for a new commmand.
+- Have a working **history**.
+- Find and launch **executables** (using the PATH variable or an absolute path).
+- Handle `'` (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.
+- Handle `"` (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
 - Implement redirections such as:
   - `<` redirect input.
   - `>` redirect output.
