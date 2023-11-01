@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 17:01:25 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:09:47 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ bool	is_builtin(t_command *cmd)
 
 	if (!cmd->full_cmd)
 		return (false);
-	if (cmd->full_cmd && ft_strchr(cmd->full_cmd[0], '/') || \
-		cmd->full_path && ft_strchr(cmd->full_path, '/'))
+	if ((cmd->full_cmd && ft_strchr(cmd->full_cmd[0], '/')) || \
+		(cmd->full_path && ft_strchr(cmd->full_path, '/')))
 		return (false);
 	len = ft_strlen(cmd->full_cmd[0]);
 	if (!ft_strncmp(cmd->full_cmd[0], "cd", len) && len == 2)

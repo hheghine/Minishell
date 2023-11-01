@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:46:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 18:57:27 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:11:11 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	*mini_fork_check(t_prompt *prompt, t_list *cmd, int fd[2])
 		dir = opendir(node->full_cmd[0]);
 	if (node->infile == -1 || node->outfile == -1)
 		return (NULL);
-	if (node->full_path && access(node->full_path, X_OK) == 0 || is_builtin(node)) // is builtin or executable
+	if ((node->full_path && access(node->full_path, X_OK) == 0) || is_builtin(node)) // is builtin or executable
 		execute(prompt, cmd, fd);
 	else if (!is_builtin(node) && ((node->full_path && \
 		access(node->full_path, F_OK) == 0) || dir)) // is a directory

@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 02:43:49 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:31:19 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	*mini_error(int errmsg, char *param, int errcode)
 	else if (errmsg == ISDIR)
 		ft_putstr_fd("\033[0;33mIs a directory: \033[0m", 2);
 	else if (errmsg == NDIR)
-		ft_putstr_fd("\033[0;33mNo such file or directory: ", 2);
+		ft_putstr_fd("\033[0;33mNo such file or directory: \033[0m", 2);
 	else if (errmsg == ECMD)
-		ft_putstr_fd("\033[0;33mcommand not found: ", 2);
+		ft_putstr_fd("\033[0;33mcommand not found: \033[0m", 2);
 	else if (errmsg == EFORK)
 		ft_putstr_fd("\033[0;33mfork failed\n", 2);
 	else if (errmsg == EPIPE)

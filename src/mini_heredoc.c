@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 17:41:18 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:11:41 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*here_doc(char *str[2], char *limiter, char *warning, uint64_t len)
 	char	*temp;
 
 	while (gstatus != 130 && (!str[0] || ft_strncmp(str[0], limiter, len) \
-		|| ft_strlen(limiter) != len))
+		|| (uint64_t)ft_strlen(limiter) != len))
 	{
 		temp = str[1];
 		str[1] = ft_strjoin(str[1], str[0]);
