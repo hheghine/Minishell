@@ -6,7 +6,7 @@ RESET			:= \033[0m
 
 SRC_DIR 		= src
 SRCS			= $(wildcard $(SRC_DIR)/*.c)
-HEADERS			= $(wildcard includes/*.h, libraries/readline-8.1/readline.h)
+HEADERS			= $(wildcard includes/*.h)
 OBJ_DIR			= obj
 OBJS			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 INCS			= -Iincludes
