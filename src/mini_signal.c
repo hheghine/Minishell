@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:00:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 01:53:29 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 02:28:04 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	gstatus;
 //     void (*sa_restorer)(void);    // Not used in modern systems, reserved for future use
 // };
 
+static int  quit_handler(void)
+{
+    return (0);
+}
+
 void sigaction_handler1(void)
 {
     struct sigaction sa;
@@ -34,6 +39,8 @@ void sigaction_handler1(void)
     sa.sa_handler = SIG_IGN; // maybe i don't need this one
     if (sigaction(SIGQUIT, &sa, NULL) == -1)
         error_msg("Error setting up SIGQUIT handler");
+    rl_catch_signals = 0;
+    rl_event_hook = &quit_handler;
 }
 
 void    sigaction_handler2(void)
@@ -64,13 +71,15 @@ void    sigaction_handler3(void)
         error_msg("Error setting up SIGQUIT handler");
 }
 
-void	handle_sigint(int sig)
+void handle_sigint(int sig)
 {
-	if (sig == SIGINT)
-	{
-		gstatus = CTRLC;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n"); // Terminal Input Output Control Simulate Terminal Input
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
+    if (sig == SIGINT)
+    {
+        gstatus = CTRLC;
+        // rl_on_new_line();
+        ioctl(STDIN_FILENO, TIOCSTI, "\n"); // Terminal Input Output Control Simulate Terminal Input
+        rl_replace_line("", 0);
+        // rl_forced_update_display(); // Force readline to update the display
+        // rl_redisplay();
+    }
 }
