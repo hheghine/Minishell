@@ -11,12 +11,14 @@ SRCS			= $(wildcard $(SRC_DIR)/*.c)
 HEADERS			= $(wildcard includes/*.h)
 OBJ_DIR			= obj
 OBJS			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-INCS			= -Iincludes
+INCS			= -I./includes -I./readline-8.2/include
+#INCS			= -Iincludes
 CC				= cc 
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g
 #LIBFLAGS		= -lreadline
-LIBFLAGS		= -Llibraries/readline-8.1/ -lreadline -lhistory
+LIBFLAGS		= -Llibraries/readline-8.2 -lreadline -lhistory
+#LIBFLAGS		= -Lreadline-8.2 -lreadline
 
 ifeq ($(PLATFORM), Linux)
 	LFLAGS	+=	-ltinfo
@@ -50,6 +52,10 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADERS) Makefile
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) $(INCS) -o $(NAME) $(OBJS) $(LIBFT) $(LIBFLAGS)
 				@$(PRINTF) "\r%100s\r$(PINK)✧ $(PURPLE)Minishell $(PINK)successfully compiled! ✧$(RESET)\n"
+			
+configure:
+				mkdir -p readline-8.2
+				./readline_config.sh readline-8.2
 
 clean:			
 				@$(MAKE) clean -C ${LIBFT_PATH}  > /dev/null 2>&1

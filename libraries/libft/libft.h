@@ -86,5 +86,6 @@ int		ft_strchr_idx(const char *s, int c);
 If a match is found, it returns the index of the character in s; otherwise, it returns -1.*/
 int		ft_strchr_set(const char *s, char *set);
 int		ft_charcount(char *str, char c);
+char	**ft_split_once(char *str, int c);
 
 #endif

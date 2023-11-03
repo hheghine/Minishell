@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 22:10:46 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:15:15 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	find_from_envp(char *var, char **envp, int i[2])
+int	find_from_envp(char *var, char **envp, int i[2])
 {
 	int	j;
 
@@ -21,10 +21,10 @@ bool	find_from_envp(char *var, char **envp, int i[2])
 	while (envp[i[1]])
 	{
 		if (!ft_strncmp(envp[i[1]], var, j))
-			return (true);
+			return (1);
 		i[1]++;
 	}
-	return (false);
+	return (0);
 }
 
 int	mini_unset(t_prompt *prompt)
@@ -67,8 +67,25 @@ static void	export_declare_x(char **m)
 void	mini_export_noarg(t_prompt *prompt)
 {
 	char	**temp;
+	char	**splitted;
+	char	*str[2];
+	int		i;
 
 	temp = ft_alphabetical_matrix(prompt->envp);
+	i = -1;
+	while (temp[++i])
+	{
+		splitted = ft_split_once(temp[i], '=');
+		str[0] = ft_strjoin(splitted[0], "\"");
+		str[1] = ft_strjoin(str[0], splitted[1]);
+		free(str[0]);
+		str[0] = ft_strjoin(str[1], "\"");
+		free(str[1]);
+		str[1] = temp[i];
+		temp[i] = str[0];
+		free(str[1]);
+		ft_free_matrix(&splitted);
+	}
 	export_declare_x(temp);
 	ft_printmatrix_fd(temp, 1);
 	ft_free_matrix(&temp);
@@ -79,7 +96,8 @@ making them accessible to child processes */
 int	mini_export(t_prompt *prompt, t_list *cmd)
 {
 	t_command	*arg;
-	bool		flag;
+	char		**splitted;
+	int			flag;
 	int			i[2];
 
 	arg = cmd->content;
@@ -90,7 +108,8 @@ int	mini_export(t_prompt *prompt, t_list *cmd)
 		i[0] = 1;
 		while (arg->full_cmd[i[0]])
 		{
-			flag = find_from_envp(arg->full_cmd[i[0]], prompt->envp, i);
+			splitted = ft_split_once(arg->full_cmd[i[0]], '=');
+			flag = find_from_envp(splitted[0], prompt->envp, i);
 			if (flag)
 			{
 				free(prompt->envp[i[1]]);
@@ -99,6 +118,7 @@ int	mini_export(t_prompt *prompt, t_list *cmd)
 			else
 				prompt->envp = ft_extend_matrix(prompt->envp, arg->full_cmd[i[0]]);
 			i[0]++;
+			ft_free_matrix(&splitted);
 		}
 	}
 	return (0);
