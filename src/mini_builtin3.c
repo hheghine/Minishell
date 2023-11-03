@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 16:15:15 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:34:37 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,30 +93,28 @@ void	mini_export_noarg(t_prompt *prompt)
 
 /* "export" is used to define and modify environment variables,
 making them accessible to child processes */
-int	mini_export(t_prompt *prompt, t_list *cmd)
+int	mini_export(t_prompt *p, t_list *c)
 {
-	t_command	*arg;
 	char		**splitted;
-	int			flag;
-	int			i[2];
+	int			i[3]; // i[2] used as a flag
 
-	arg = cmd->content;
-	if (ft_matrixlen(arg->full_cmd) == 1)
-		mini_export_noarg(prompt);
-	else if (ft_matrixlen(arg->full_cmd) >= 2)
+	if (ft_matrixlen(((t_command *)c->content)->full_cmd) == 1)
+		mini_export_noarg(p);
+	else if (ft_matrixlen(((t_command *)c->content)->full_cmd) >= 2)
 	{
 		i[0] = 1;
-		while (arg->full_cmd[i[0]])
+		while (((t_command *)c->content)->full_cmd[i[0]])
 		{
-			splitted = ft_split_once(arg->full_cmd[i[0]], '=');
-			flag = find_from_envp(splitted[0], prompt->envp, i);
-			if (flag)
+			splitted = ft_split_once(((t_command *)c->content)->full_cmd[i[0]], '=');
+			i[2] = find_from_envp(splitted[0], p->envp, i);
+			if (i[2])
 			{
-				free(prompt->envp[i[1]]);
-				prompt->envp[i[1]] = ft_strdup(arg->full_cmd[i[0]]);
+				free(p->envp[i[1]]);
+				p->envp[i[1]] = ft_strdup(((t_command *)c->content)->full_cmd[i[0]]);
 			}
 			else
-				prompt->envp = ft_extend_matrix(prompt->envp, arg->full_cmd[i[0]]);
+				p->envp = ft_extend_matrix(p->envp, \
+					((t_command *)c->content)->full_cmd[i[0]]);
 			i[0]++;
 			ft_free_matrix(&splitted);
 		}
