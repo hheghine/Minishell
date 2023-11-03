@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 20:11:41 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:39:16 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ char	*here_doc(char *str[2], char *limiter, char *warning, uint64_t len)
 	return (str[1]);
 }
 
-int	mini_here_doc(char *str[2], char *limiter)
+int	mini_here_doc(t_prompt *prompt, char *str[2], char *limiter)
 {
 	int	fd[2];
+	int	q[2];
 
 	gstatus = 0;
 	if (pipe(fd) < 0)
@@ -52,9 +53,12 @@ int	mini_here_doc(char *str[2], char *limiter)
 	}
 	str[1] = here_doc(str, limiter, \
 		"warning: here-document delimited by end-of-file", 0);
-	// printf("%s\n", str[1]);
-	write(fd[WRITE_END], str[1], ft_strlen(str[1]));
-	free(str[1]);
+	str[0] = expand_vars(str[1], prompt, q, -1);
+	// printf("expanded: %s\n", str[0]);
+	// str[1] = ft_strjoin(str[0], "\n");
+	// free(str[0]);
+	write(fd[WRITE_END], str[0], ft_strlen(str[0]));
+	free(str[0]);
 	close(fd[WRITE_END]);
 	if (gstatus == 130)
 	{

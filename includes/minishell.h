@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/02 21:04:02 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:46:34 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,19 @@ char		**cmd_subsplit(const char *str, char *set);
 /**************************mini_strtrim_q.c*************************/
 char		*strtrim_quotes(const char *str, int squote, int dquote);
 /****************************mini_nodes.c***************************/
-t_list		*fill_nodes(char **args, int i);
+// t_list		*fill_nodes(char **args, int i);
+t_list	*fill_nodes(t_prompt *prompt, char **args, int i);
 /*****************************mini_fd.c*****************************/
 int			get_fd(int prev_fd, char *path, int flags[2]);
 /***************************mini_iofiles.c**************************/
 t_command	*open_outfile1(t_command *node, char **args, int *i);
 t_command	*open_outfile2(t_command *node, char **args, int *i);
 t_command	*open_infile1(t_command *node, char **args, int *i);
-t_command	*open_infile2(t_command *node, char **args, int *i);
+// t_command	*open_infile2(t_command *node, char **args, int *i);
+t_command	*open_infile2(t_prompt *prompt, t_command *node, char **args, int *i);
 /***************************mini_heredoc.c**************************/
-int			mini_here_doc(char *str[2], char *temp);
+// int			mini_here_doc(char *str[2], char *temp);
+int	mini_here_doc(t_prompt *prompt, char *str[2], char *limiter);
 /***************************mini_builtin1.c*************************/
 int			mini_builtin(t_prompt *prompt, t_list *cmd, int *isexit, int n);
 bool		is_builtin(t_command *cmd);

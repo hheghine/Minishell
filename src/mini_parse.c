@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 01:59:23 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:45:14 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*parse_args(char **args, t_prompt *prompt)
 
 	isexit = 0;
 	splitted = split_final(args, prompt);
-	prompt->cmds = fill_nodes(splitted, -1);
+	prompt->cmds = fill_nodes(prompt, splitted, -1);
 	if (!prompt->cmds)
 		return (prompt);
 	i = ft_lstsize(prompt->cmds);

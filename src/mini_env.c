@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:51:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 01:44:34 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:26:06 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ char	*get_env(char *varname, char **envp, int n1)
 		if (n2 < ft_strchr_idx(envp[i], '='))
 			n2 = ft_strchr_idx(envp[i], '=');
 		if (!ft_strncmp(envp[i], varname, n2))
+		{
 			return (ft_substr(envp[i], n2 + 1, ft_strlen(envp[i])));
+		}
 		i++;
 	}
 	return (NULL);

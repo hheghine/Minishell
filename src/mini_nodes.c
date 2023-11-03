@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/30 20:57:09 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:47:05 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	**trim_args(char **args)
 	return (trimmed);
 }
 
-static t_command	*cmd_parameters(t_command *cmd, char **args[2], int *i)
+static t_command	*cmd_parameters(t_prompt *prompt, t_command *cmd, char **args[2], int *i)
 {
 	if (args[0][*i])
 	{
@@ -62,7 +62,7 @@ static t_command	*cmd_parameters(t_command *cmd, char **args[2], int *i)
 			cmd = open_outfile1(cmd, args[1], i);
 		else if (args[0][*i][0] == '<' && args[0][*i + 1] \
 			&& args[0][*i + 1][0] == '<')
-			cmd = open_infile2(cmd, args[1], i);
+			cmd = open_infile2(prompt, cmd, args[1], i);
 		else if (args[0][*i][0] == '<')
 			cmd = open_infile1(cmd, args[1], i);
 		else if (args[0][*i][0] != '|')
@@ -79,7 +79,7 @@ static t_command	*cmd_parameters(t_command *cmd, char **args[2], int *i)
 	return (cmd);
 }
 
-t_list	*fill_nodes(char **args, int i)
+t_list	*fill_nodes(t_prompt *prompt, char **args, int i)
 {
 	char	**temp[2];
 	t_list	*nodes[2];
@@ -96,7 +96,7 @@ t_list	*fill_nodes(char **args, int i)
 			ft_lstadd_back(&nodes[0], ft_lstnew(init_t_command()));
 			nodes[1] = ft_lstlast(nodes[0]);
 		}
-		nodes[1]->content = cmd_parameters(nodes[1]->content, temp, &i);
+		nodes[1]->content = cmd_parameters(prompt, nodes[1]->content, temp, &i);
 		if (i < 0)
 			return (free_nodes(nodes[0], args, temp[1]));
 		if (!args[i])

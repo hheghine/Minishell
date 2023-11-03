@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 04:06:25 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 17:17:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:43:02 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_command	*open_infile1(t_command *node, char **args, int *i)
 	return (node);
 }
 
-t_command	*open_infile2(t_command *node, char **args, int *i)
+t_command	*open_infile2(t_prompt *prompt, t_command *node, char **args, int *i)
 {
 	char	*str[2];
 	char	*temp;
@@ -99,7 +99,7 @@ t_command	*open_infile2(t_command *node, char **args, int *i)
 	if (args[++(*i)])
 	{
 		temp = args[*i];
-		node->infile = mini_here_doc(str, temp);
+		node->infile = mini_here_doc(prompt, str, temp);
 	}
 	if (!args[*i] || node->infile == -1)
 	{
