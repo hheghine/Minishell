@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 16:45:14 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/07 23:28:24 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ char **split_final(char **args, t_prompt *prompt)
 	i = -1;
 	while (args && args[++i])
 	{
-		args[i] = expand_vars(args[i], prompt, q, -1);
-		args[i] = expand_path(args[i], q, \
+		if (i < 2 || ft_strncmp(args[i - 2], "<<", 2) > 0)
+		{
+			args[i] = expand_vars(args[i], prompt, q, -1);
+			args[i] = expand_path(args[i], q, \
 			get_env("HOME", prompt->envp, -1), -1);
+		}
 		subsplit = cmd_subsplit(args[i], "<>|"); // split commands with <, >, or | 
 		ft_matrix_replace(&args, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
