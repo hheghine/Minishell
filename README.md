@@ -3,7 +3,7 @@
 A Unix shell is a command-line interpreter or shell that provides a command line user interface for Unix-like operating systems. The shell is both an interactive command language and a scripting language, and is used by the operating system to control the execution of the system using shell scripts.<br><br>
 This project is about creating a simple shell.
 
-![Screenshot from 2023-11-01 20-49-42](https://github.com/hheghine/Minishell/assets/119530584/fa39634e-f419-4e76-a36c-062f01b81a75)
+![Screenshot from 2023-11-07 23-34-49](https://github.com/hheghine/Minishell/assets/119530584/163fa9eb-86ad-4517-9e39-254745b2b970)
 
 ## What Is Bash and How Does It Work?
 
