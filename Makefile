@@ -11,17 +11,18 @@ SRCS			= $(wildcard $(SRC_DIR)/*.c)
 HEADERS			= $(wildcard includes/*.h)
 OBJ_DIR			= obj
 OBJS			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-INCS			= -I./includes -I./readline-8.2/include
+INCS			= -I./includes -I./readline_heghine/include
 #INCS			= -Iincludes
 CC				= cc 
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g
 #LIBFLAGS		= -lreadline
-LIBFLAGS		= -Llibraries/readline-8.2 -lreadline -lhistory
+LIBFLAGS		= -Lreadline_heghine/lib -lreadline -lhistory
 #LIBFLAGS		= -Lreadline-8.2 -lreadline
 
 ifeq ($(PLATFORM), Linux)
 	LFLAGS	+=	-ltinfo
+	LIBFLAGS = -lreadline -lhistory
 endif
 
 MK				= mkdir -p
@@ -40,6 +41,10 @@ CURRENT_SRC		:= 0
 SRC_PCT			= $(shell expr 100 \* $(CURRENT_SRC) / $(TOTAL_SRC))
 
 all:			$(OBJ_DIR) $(NAME)
+
+readline_install:
+					$(MK) readline_heghine
+					./readline_config.sh readline_heghine
 
 $(OBJ_DIR): 	$(SRC_DIR)
 				@$(MK) $(OBJ_DIR)
