@@ -32,7 +32,7 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-BUILD_DIR = /Users/hbalasan/Desktop/Minishell/libraries/readline-8.2
+BUILD_DIR = /Users/tmnatsak/Desktop/kek/libraries/readline-8.2
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -52,7 +52,7 @@ SHELL = /bin/sh
 host_os = darwin18.7.0
 host_vendor = apple
 
-prefix = /Users/hbalasan/Desktop/Minishell/libraries/readline-8.2
+prefix = /Users/tmnatsak/Desktop/kek/readline_heghine
 exec_prefix = ${prefix}
 includedir = ${prefix}/include
 bindir = ${exec_prefix}/bin

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 00:40:21 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/07 23:27:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:28:40 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int gstatus;
+extern int	g_gstatus;
 
 char	*expand_path(char *s, int q[2], char *getpath, int i)
 {
@@ -52,26 +52,22 @@ char	*get_exp_var(char *s, t_prompt *prompt, int i)
 	pos = ft_strchr_set(&s[i], "|\"\'$?>< \n") + (ft_strchr("$?", s[i]) != 0);
 	if (pos == -1)
 		pos = ft_strlen(s) - 1;
-	// printf("pos: %d", pos);
 	expanded = ft_substr(s, 0, i - 1);
 	var = get_env(&s[i], prompt->envp, ft_strchr_set(&s[i], "|\"\'$?>< \n"));
-	// printf("here: %s\n", &s[i]);
-	// printf("expanded: %s\n", var);
 	if (!var && s[i] == '$')
 		var = ft_itoa(prompt->pid);
 	else if (!var && s[i] == '?')
-		var = ft_itoa(gstatus);
-	// printf("HERE: %s %s\n", expanded, var);
+		var = ft_itoa(g_gstatus);
 	path = ft_strjoin(expanded, var);
 	free(expanded);
 	expanded = ft_strjoin(path, &s[i + pos]);
 	free(path);
 	free(var);
 	free(s);
-	return(expanded);
+	return (expanded);
 }
 
-char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i) // check special cases $\ and $[
+char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i)
 {
 	q[0] = 0;
 	q[1] = 0;
@@ -82,7 +78,7 @@ char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i) // check special c
 		if (!q[0] && s[i] == '$' && s[i + 1] && \
 			((ft_strchr_set(&s[i + 1], "/~%^{}+-:;,. ") && !q[1]) || \
 			(ft_strchr_set(&s[i + 1], "/~%^{}:;+-,.\"") && q[1])))
-		return (expand_vars(get_exp_var(s, prompt, ++i), prompt, q, -1));
+			return (expand_vars(get_exp_var(s, prompt, ++i), prompt, q, -1));
 	}
 	return (s);
 }

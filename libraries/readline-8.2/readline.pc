@@ -1,4 +1,4 @@
-prefix=/Users/hbalasan/Desktop/Minishell/libraries/readline-8.2
+prefix=/Users/tmnatsak/Desktop/kek/readline_heghine
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

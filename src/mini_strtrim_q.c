@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_strtrim_q.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:08:28 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/26 19:54:50 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:40:02 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static int	trimmed_len(const char *str)
 	return (count);
 }
 
-// Quote Removal: The quote characters: '\', '", and '' (backslash, single-quote, double-quote)
-//that were present in the original word shall be removed unless they have themselves been quoted.
 char	*strtrim_quotes(const char *str, int squote, int dquote)
 {
 	char	*trimmed;

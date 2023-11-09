@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 16:34:37 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:16:30 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ making them accessible to child processes */
 int	mini_export(t_prompt *p, t_list *c)
 {
 	char		**splitted;
-	int			i[3]; // i[2] used as a flag
+	int			i[3];
 
 	if (ft_matrixlen(((t_command *)c->content)->full_cmd) == 1)
 		mini_export_noarg(p);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:51:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 17:26:06 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:19:11 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ char	**set_env(char *var, char *value, char **envp)
 		if (!ft_strncmp(envp[i[0]], var, i[1]))
 		{
 			s[0] = envp[i[0]];
-			envp[i[0]] = s[1]; // updates the environment variable with the new value
+			envp[i[0]] = s[1];
 			free(s[0]);
 			return (envp);
 		}
 	}
-	envp = ft_extend_matrix(envp, s[1]); // adds the new environment variable to the existing envp
+	envp = ft_extend_matrix(envp, s[1]);
 	free(s[1]);
 	return (envp);
 }

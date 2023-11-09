@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 01:53:19 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:44:56 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	gstatus;
+extern int	g_gstatus;
 
 void	init_varp(t_prompt *prompt, char **argv)
 {
 	char	*str;
 	char	*num;
 
-	str  = getcwd(NULL, 0);
+	str = getcwd(NULL, 0);
 	prompt->envp = set_env("PWD", str, prompt->envp);
 	free(str);
 	str = get_env("SHLVL", prompt->envp, -1);
@@ -35,9 +35,9 @@ void	init_varp(t_prompt *prompt, char **argv)
 		prompt->envp = set_env("PATH", \
 		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin", prompt->envp);
 	free(str);
-	str = get_env("_", prompt->envp, -1); // "_" (underscore) is used to store the last argument to the last executed command
+	str = get_env("_", prompt->envp, -1);
 	if (!str)
-		prompt->envp = set_env("_", argv[0], prompt->envp); // "!!" the last command that you executed
+		prompt->envp = set_env("_", argv[0], prompt->envp);
 	free(str);
 }
 
@@ -45,8 +45,8 @@ void	init_prompt(t_prompt *prompt, char **argv, char **env)
 {
 	prompt->cmds = NULL;
 	prompt->envp = ft_dup_matrix(env);
-	prompt->pid = getpid(); // check this part
-	gstatus = 0;
+	prompt->pid = getpid();
+	g_gstatus = 0;
 	init_varp(prompt, argv);
 }
 
@@ -54,8 +54,9 @@ int	main(int argc, char **argv, char **env)
 {
 	t_prompt	prompt;
 	char		*str;
-	char		*cmd = "";
-	
+	char		*cmd ;
+
+	cmd = "";
 	if (argc > 1)
 		error_msg("Minishell doesn't take any arguments!\033[0m");
 	printf("\n%s\n\n", MINISHELL1);
@@ -63,19 +64,17 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		sigaction_handler1();
-		// signal(SIGINT, handle_sigint);
-		// signal(SIGQUIT, SIG_IGN);
 		str = get_prompt(prompt);
-		if(str)
+		if (str)
 		{
 			cmd = readline(str);
 			free(str);
 		}
 		else
 			cmd = readline(READLINE_MSG1);
-		if (!check_args(cmd, &prompt)) // cmd is being freed
+		if (!check_args(cmd, &prompt))
 			break ;
 	}
 	free_prompt(&prompt);
-	return (gstatus);
+	return (g_gstatus);
 }

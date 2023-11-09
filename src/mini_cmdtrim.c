@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cmdtrim.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 22:06:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/21 20:35:48 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:18:54 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,11 @@ char	**cmd_trim(const char *str, char *set)
 		return (NULL);
 	wcount = count_words(str, set, idx);
 	if (wcount == -1)
-		return (mini_error(EQUOTE, NULL, 1)); // return (NULL)
+		return (mini_error(EQUOTE, NULL, 1));
 	trimmed = (char **)malloc(sizeof(char *) * (wcount + 1));
 	if (!trimmed)
 		return (NULL);
 	trimmed = fill_matrix(trimmed, str, set, i);
 	trimmed[wcount] = NULL;
-	// for (int i = 0; trimmed[i]; i++)
-	// {
-	// 	for (int j = 0; trimmed[i][j]; j++)
-	// 		printf("%c", trimmed[i][j]);
-	// 	printf("\n");
-	// }
 	return (trimmed);
 }

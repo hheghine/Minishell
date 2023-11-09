@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 18:46:05 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:15:37 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	gstatus;
+extern int	g_gstatus;
 
 int	mini_cd(t_prompt *prompt)
 {
@@ -20,7 +20,7 @@ int	mini_cd(t_prompt *prompt)
 	char	**str;
 	char	*temp;
 
-	gstatus = 0;
+	g_gstatus = 0;
 	full_cmd = ((t_command *)prompt->cmds->content)->full_cmd;
 	temp = get_env("HOME", prompt->envp, 4);
 	if (!temp)
@@ -31,7 +31,7 @@ int	mini_cd(t_prompt *prompt)
 	str = ft_extend_matrix(str, temp);
 	free(temp);
 	mini_cd_error(full_cmd, str);
-	if (!gstatus)
+	if (!g_gstatus)
 		prompt->envp = set_env("OLDPWD", str[1], prompt->envp);
 	temp = getcwd(NULL, 0);
 	if (!temp)
@@ -40,7 +40,7 @@ int	mini_cd(t_prompt *prompt)
 	free(temp);
 	prompt->envp = set_env("PWD", str[2], prompt->envp);
 	ft_free_matrix(&str);
-	return (gstatus);
+	return (g_gstatus);
 }
 
 // echo -n: this option is used to omit echoing trailing newline.
@@ -83,6 +83,12 @@ int	mini_pwd(void)
 	return (0);
 }
 
+static void	is_exit(int *isexit)
+{
+	if (*isexit)
+		ft_putstr_fd("\033[0;35mexit\033[1;36m⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
+}
+
 int	mini_exit(t_list *cmd, int *isexit)
 {
 	t_command	*node;
@@ -90,9 +96,8 @@ int	mini_exit(t_list *cmd, int *isexit)
 
 	node = cmd->content;
 	*isexit = !(cmd->next);
-	if (*isexit)
-		ft_putstr_fd("\033[0;35mexit\033[1;36m⁺₊⋆☽⁺₊⋆\033[0m\n", 2);
-	if (!node->full_cmd || !node->full_cmd[1]) // if there is no second argument after the "exit" command
+	is_exit(isexit);
+	if (!node->full_cmd || !node->full_cmd[1])
 		return (0);
 	status[0] = ft_atoi_ext(node->full_cmd[1], &status[1]);
 	if (status[0] == -1)
@@ -109,6 +114,6 @@ int	mini_exit(t_list *cmd, int *isexit)
 		print_error_msg_fd("exit: too many arguments\n", 1);
 		return (1);
 	}
-	status[1] = (status[1] % 256) + 256 * (status[1] < 0); // range [0, 255] as exit statuses are typically limited to 8 bits
+	status[1] = (status[1] % 256) + 256 * (status[1] < 0);
 	return (status[1]);
 }

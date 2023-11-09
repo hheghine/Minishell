@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_nodes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:54:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 16:47:05 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:34:48 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,28 @@ static char	**trim_args(char **args)
 	return (trimmed);
 }
 
-static t_command	*cmd_parameters(t_prompt *prompt, t_command *cmd, char **args[2], int *i)
+static t_command	*cmd_params(t_prompt *prompt, t_command *cmd, \
+											char **av[2], int *i)
 {
-	if (args[0][*i])
+	if (av[0][*i])
 	{
-		// printf("%s %d\n", *args[1], *i);
-		if (args[0][*i][0] == '>' && args[0][*i + 1] && args[0][*i + 1][0] == '>')
-			cmd = open_outfile2(cmd, args[1], i);
-		else if (args[0][*i][0] == '>')
-			cmd = open_outfile1(cmd, args[1], i);
-		else if (args[0][*i][0] == '<' && args[0][*i + 1] \
-			&& args[0][*i + 1][0] == '<')
-			cmd = open_infile2(prompt, cmd, args[1], i);
-		else if (args[0][*i][0] == '<')
-			cmd = open_infile1(cmd, args[1], i);
-		else if (args[0][*i][0] != '|')
-			cmd->full_cmd = ft_extend_matrix(cmd->full_cmd, args[1][*i]);
+		if (av[0][*i][0] == '>' && av[0][*i + 1] && av[0][*i + 1][0] == '>')
+			cmd = open_outfile2(cmd, av[1], i);
+		else if (av[0][*i][0] == '>')
+			cmd = open_outfile1(cmd, av[1], i);
+		else if (av[0][*i][0] == '<' && av[0][*i + 1] \
+			&& av[0][*i + 1][0] == '<')
+			cmd = open_infile2(prompt, cmd, av[1], i);
+		else if (av[0][*i][0] == '<')
+			cmd = open_infile1(cmd, av[1], i);
+		else if (av[0][*i][0] != '|')
+			cmd->full_cmd = ft_extend_matrix(cmd->full_cmd, av[1][*i]);
 		else
 		{
 			mini_error(EPIPEND, NULL, 2);
 			*i = -2;
 		}
-		return(cmd);
+		return (cmd);
 	}
 	mini_error(EPIPEND, NULL, 2);
 	*i = -2;
@@ -92,11 +92,11 @@ t_list	*fill_nodes(t_prompt *prompt, char **args, int i)
 		nodes[1] = ft_lstlast(nodes[0]);
 		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
 		{
-			i += (args[i][0] == '|'); // (args[i][0] == '<' && args[i][1] && args[i][1] == '<')
+			i += (args[i][0] == '|');
 			ft_lstadd_back(&nodes[0], ft_lstnew(init_t_command()));
 			nodes[1] = ft_lstlast(nodes[0]);
 		}
-		nodes[1]->content = cmd_parameters(prompt, nodes[1]->content, temp, &i);
+		nodes[1]->content = cmd_params(prompt, nodes[1]->content, temp, &i);
 		if (i < 0)
 			return (free_nodes(nodes[0], args, temp[1]));
 		if (!args[i])

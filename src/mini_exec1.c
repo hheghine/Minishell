@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exec1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/03 16:38:28 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:26:21 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	gstatus;
+extern int	g_gstatus;
 
 char	*find_command(char **env_path, char *cmd, char *full_path)
 {
@@ -40,11 +40,10 @@ char	*find_command(char **env_path, char *cmd, char *full_path)
 		free(full_path);
 		return (NULL);
 	}
-	// printf("%s\n", full_path);
 	return (full_path);
 }
 
-DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char ***str, char *path)
+DIR	*cmd_and_path_check(t_prompt *prompt, t_list *cmd, char ***str, char *path)
 {
 	DIR			*dir;
 	t_command	*node;
@@ -61,13 +60,13 @@ DIR	*command_and_path_check(t_prompt *prompt, t_list *cmd, char ***str, char *pa
 		free(node->full_cmd[0]);
 		node->full_cmd[0] = ft_strdup(str[0][ft_matrixlen(*str) - 1]);
 	}
-	else if(!is_builtin(node) && node && node->full_cmd && !dir)
+	else if (!is_builtin(node) && node && node->full_cmd && !dir)
 	{
 		path = get_env("PATH", prompt->envp, 4);
 		*str = ft_split(path, ':');
 		free(path);
-		node->full_path = find_command(*str, node->full_cmd[0], node->full_path);
-		if (!node->full_path || !node->full_cmd[0] || !node->full_cmd[0][0])
+		node->full_path = find_command(*str, *node->full_cmd, node->full_path);
+		if (!node->full_path || !*node->full_cmd || !node->full_cmd[0][0])
 			mini_error(ECMD, node->full_cmd[0], 127);
 	}
 	return (dir);
@@ -84,7 +83,7 @@ void	get_command(t_prompt *prompt, t_list *cmd)
 	str = NULL;
 	path = NULL;
 	node = cmd->content;
-	dir = command_and_path_check(prompt, cmd, &str, path);
+	dir = cmd_and_path_check(prompt, cmd, &str, path);
 	if (!is_builtin(node) && node && node->full_cmd && dir)
 		mini_error(ISDIR, node->full_cmd[0], 126);
 	else if (!is_builtin(node) && node && node->full_path && \
@@ -92,7 +91,7 @@ void	get_command(t_prompt *prompt, t_list *cmd)
 		mini_error(NDIR, node->full_path, 127);
 	else if (!is_builtin(node) && node && node->full_path && \
 		access(node->full_path, X_OK) == -1)
-			mini_error(EPERM, node->full_path, 126);
+		mini_error(EPERM, node->full_path, 126);
 	if (dir)
 		closedir(dir);
 	ft_free_matrix(&str);
@@ -112,9 +111,9 @@ void	*exec_command(t_prompt *prompt, t_list *cmd)
 		((t_command *)cmd->next->content)->infile = fd[READ_END];
 	else
 		close(fd[READ_END]);
-	if (((t_command *)cmd->content)->infile > 2) // not standard IN, OUT, or ERROR
+	if (((t_command *)cmd->content)->infile > 2)
 		close(((t_command *)cmd->content)->infile);
-	if (((t_command *)cmd->content)->outfile > 2) // not standard IN, OUT, or ERROR
+	if (((t_command *)cmd->content)->outfile > 2)
 		close(((t_command *)cmd->content)->outfile);
 	return (NULL);
 }
