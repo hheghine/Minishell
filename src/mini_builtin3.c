@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:16:30 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/11 20:08:12 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,14 @@ int	mini_export(t_prompt *p, t_list *c)
 
 	if (ft_matrixlen(((t_command *)c->content)->full_cmd) == 1)
 		mini_export_noarg(p);
-	else if (ft_matrixlen(((t_command *)c->content)->full_cmd) >= 2)
+	if (ft_matrixlen(((t_command *)c->content)->full_cmd) >= 2)
 	{
 		i[0] = 1;
+		if (!ft_isalpha(*((t_command *)c->content)->full_cmd[i[0]]) && *((t_command *)c->content)->full_cmd[i[0]] != '_')
+		{
+			print_error_msg_fd("export: not a valid identifier", 1);
+			return (1);
+		}
 		while (((t_command *)c->content)->full_cmd[i[0]])
 		{
 			splitted = ft_split_once(((t_command *)c->content)->full_cmd[i[0]], '=');

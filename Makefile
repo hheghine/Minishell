@@ -15,7 +15,7 @@ INCS			= -I./includes -I./readline_heghine/include
 #INCS			= -Iincludes
 CC				= cc 
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS			=  -fsanitize=address -g #-Wall -Wextra -Werror
 #LIBFLAGS		= -lreadline
 LIBFLAGS		= -Lreadline_heghine/lib -lreadline -lhistory
 #LIBFLAGS		= -Lreadline-8.2 -lreadline
