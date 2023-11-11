@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:51:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:19:11 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:37:12 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_env(char *varname, char **envp, int n1)
 	i = 0;
 	if (n1 < 0)
 		n1 = ft_strlen(varname);
-	while (!ft_strchr(varname, '=') && envp && envp[i])
+	while (envp && envp[i]) // !ft_strchr(varname, '=') && 
 	{
 		n2 = n1;
 		if (n2 < ft_strchr_idx(envp[i], '='))

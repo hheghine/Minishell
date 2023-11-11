@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 00:40:21 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:28:40 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:39:24 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ char	*get_exp_var(char *s, t_prompt *prompt, int i)
 	char	*var;
 	int		pos;
 
-	pos = ft_strchr_set(&s[i], "|\"\'$?>< \n") + (ft_strchr("$?", s[i]) != 0);
+	pos = ft_strchr_set(&s[i], "=|/\"\'$?>< \n") + (ft_strchr("$?", s[i]) != 0);
 	if (pos == -1)
 		pos = ft_strlen(s) - 1;
 	expanded = ft_substr(s, 0, i - 1);
-	var = get_env(&s[i], prompt->envp, ft_strchr_set(&s[i], "|\"\'$?>< \n"));
+	var = get_env(&s[i], prompt->envp, ft_strchr_set(&s[i], " =|/\"\'$?>< \n"));
 	if (!var && s[i] == '$')
 		var = ft_itoa(prompt->pid);
 	else if (!var && s[i] == '?')
@@ -76,8 +76,8 @@ char	*expand_vars(char *s, t_prompt *prompt, int q[2], int i)
 		q[0] = (q[0] + (!q[1] && s[i] == '\'')) % 2;
 		q[1] = (q[1] + (!q[0] && s[i] == '\"')) % 2;
 		if (!q[0] && s[i] == '$' && s[i + 1] && \
-			((ft_strchr_set(&s[i + 1], "/~%^{}+-:;,. ") && !q[1]) || \
-			(ft_strchr_set(&s[i + 1], "/~%^{}:;+-,.\"") && q[1])))
+			((ft_strchr_set(&s[i + 1], "=/~%^{}+-:;,. ") && !q[1]) || \
+			(ft_strchr_set(&s[i + 1], "=/~%^{}:;+-,.\"") && q[1])))
 			return (expand_vars(get_exp_var(s, prompt, ++i), prompt, q, -1));
 	}
 	return (s);
