@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:48:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:05:12 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 bool	is_builtin(t_command *cmd)
 {
@@ -59,19 +59,19 @@ int	mini_builtin(t_prompt *prompt, t_list *cmd, int *isexit, int n)
 			n = ft_strlen(*c->full_cmd);
 		if (c && c->full_cmd && *c->full_cmd && \
 		!ft_strncmp(*c->full_cmd, "exit", n) && n == 4)
-			g_gstatus = mini_exit(cmd, isexit);
+			g_status = mini_exit(cmd, isexit);
 		else if (!cmd->next && c && c->full_cmd && \
 		!ft_strncmp(*c->full_cmd, "cd", n) && n == 2)
-			g_gstatus = mini_cd(prompt);
+			g_status = mini_cd(prompt);
 		else if (!cmd->next && c && c->full_cmd && \
 		!ft_strncmp(*c->full_cmd, "unset", n) && n == 5)
-			g_gstatus = mini_unset(prompt);
+			g_status = mini_unset(prompt);
 		else if (!cmd->next && c && c->full_cmd && \
 		!ft_strncmp(*c->full_cmd, "export", n) && n == 6)
-			g_gstatus = mini_export(prompt, cmd);
+			g_status = mini_export(prompt, cmd);
 		else
 			is_not_builtin(prompt, cmd);
 		cmd = cmd->next;
 	}
-	return (g_gstatus);
+	return (g_status);
 }

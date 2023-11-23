@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:15:37 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 int	mini_cd(t_prompt *prompt)
 {
@@ -20,7 +20,7 @@ int	mini_cd(t_prompt *prompt)
 	char	**str;
 	char	*temp;
 
-	g_gstatus = 0;
+	g_status = 0;
 	full_cmd = ((t_command *)prompt->cmds->content)->full_cmd;
 	temp = get_env("HOME", prompt->envp, 4);
 	if (!temp)
@@ -31,7 +31,7 @@ int	mini_cd(t_prompt *prompt)
 	str = ft_extend_matrix(str, temp);
 	free(temp);
 	mini_cd_error(full_cmd, str);
-	if (!g_gstatus)
+	if (!g_status)
 		prompt->envp = set_env("OLDPWD", str[1], prompt->envp);
 	temp = getcwd(NULL, 0);
 	if (!temp)
@@ -40,7 +40,7 @@ int	mini_cd(t_prompt *prompt)
 	free(temp);
 	prompt->envp = set_env("PWD", str[2], prompt->envp);
 	ft_free_matrix(&str);
-	return (g_gstatus);
+	return (g_status);
 }
 
 // echo -n: this option is used to omit echoing trailing newline.
@@ -96,9 +96,9 @@ int	mini_exit(t_list *cmd, int *isexit)
 
 	node = cmd->content;
 	*isexit = !(cmd->next);
-	is_exit(isexit);
+	// is_exit(isexit);
 	if (!node->full_cmd || !node->full_cmd[1])
-		return (0);
+		return (g_status);
 	status[0] = ft_atoi_ext(node->full_cmd[1], &status[1]);
 	if (status[0] == -1)
 	{
@@ -106,6 +106,7 @@ int	mini_exit(t_list *cmd, int *isexit)
 		ft_putstr_fd("\033[1;33m", 2);
 		ft_putstr_fd(node->full_cmd[1], 2);
 		ft_putstr_fd("\033[0;33m: numeric argument required\033[0m\n", 2);
+		is_exit(isexit);
 		return (255);
 	}
 	else if (node->full_cmd[2])

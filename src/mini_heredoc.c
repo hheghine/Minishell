@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:30:30 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 char	*here_doc(char *str[2], char *limiter, char *warning, uint64_t len)
 {
 	char	*temp;
 
-	while (g_gstatus != 130 && (!str[0] || ft_strncmp(str[0], limiter, len) \
+	while (g_status != 130 && (!str[0] || ft_strncmp(str[0], limiter, len) \
 		|| (uint64_t)ft_strlen(limiter) != len))
 	{
 		temp = str[1];
@@ -46,7 +46,7 @@ int	mini_here_doc(t_prompt *prompt, char *str[2], char *limiter)
 	int	fd[2];
 	int	q[2];
 
-	g_gstatus = 0;
+	g_status = 0;
 	if (pipe(fd) < 0)
 	{
 		mini_error(EPIPE, NULL, 1);
@@ -58,7 +58,7 @@ int	mini_here_doc(t_prompt *prompt, char *str[2], char *limiter)
 	write(fd[WRITE_END], str[0], ft_strlen(str[0]));
 	free(str[0]);
 	close(fd[WRITE_END]);
-	if (g_gstatus == 130)
+	if (g_status == 130)
 	{
 		close(fd[READ_END]);
 		return (-1);

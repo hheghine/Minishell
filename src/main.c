@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/10 18:30:26 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 void	init_varp(t_prompt *prompt, char **argv)
 {
@@ -46,7 +46,7 @@ void	init_prompt(t_prompt *prompt, char **argv, char **env)
 	prompt->cmds = NULL;
 	prompt->envp = ft_dup_matrix(env);
 	prompt->pid = getpid();
-	g_gstatus = 0;
+	g_status = 0;
 	init_varp(prompt, argv);
 }
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 			break ;
 	}
 	free_prompt(&prompt);
-	return (g_gstatus);
+	return (g_status);
 }
 
 // exit LLONG_MAX exit code 1

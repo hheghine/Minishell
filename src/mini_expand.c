@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 00:40:21 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/11 17:39:24 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 char	*expand_path(char *s, int q[2], char *getpath, int i)
 {
@@ -57,7 +57,7 @@ char	*get_exp_var(char *s, t_prompt *prompt, int i)
 	if (!var && s[i] == '$')
 		var = ft_itoa(prompt->pid);
 	else if (!var && s[i] == '?')
-		var = ft_itoa(g_gstatus);
+		var = ft_itoa(g_status);
 	path = ft_strjoin(expanded, var);
 	free(expanded);
 	expanded = ft_strjoin(path, &s[i + pos]);

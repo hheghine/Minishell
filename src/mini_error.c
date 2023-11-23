@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:35:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:19:34 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 void	error_msg(char *msg)
 {
@@ -30,7 +30,7 @@ void	print_error_msg_fd(char *msg, int nl)
 
 static void	set_status(int errcode)
 {
-	g_gstatus = errcode;
+	g_status = errcode;
 	ft_putstr_fd("\033[1;33m⚠ minishell: ", 2);
 }
 
@@ -83,11 +83,11 @@ void	mini_cd_error(char **full_cmd, char **str)
 		dir = opendir(full_cmd[1]);
 	if (!full_cmd[1] && *str && !str[0][0])
 	{
-		g_gstatus = 1;
+		g_status = 1;
 		print_error_msg_fd("HOME not set", 1);
 	}
 	if (!full_cmd[1] && str[0])
-		g_gstatus = chdir(str[0]) < 0;
+		g_status = chdir(str[0]) < 0;
 	if (full_cmd[1] && dir && access(full_cmd[1], F_OK) != -1)
 		chdir(full_cmd[1]);
 	else if (full_cmd[1] && access(full_cmd[1], F_OK) == -1)

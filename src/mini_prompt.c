@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:31:27 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:36:14 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_gstatus;
+extern int	g_status;
 
 char	*get_user(t_prompt prompt)
 {
@@ -67,7 +67,7 @@ char	*get_prompt(t_prompt prompt)
 	temp = ft_strjoin(temp1, temp2);
 	free(temp1);
 	free(temp2);
-	if (!g_gstatus || g_gstatus == -1)
+	if (!g_status || g_status == -1)
 		temp1 = ft_strjoin(temp, "> ");
 	else
 		temp1 = ft_strjoin(temp, "\033[1;33m> ");
