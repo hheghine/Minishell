@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:54:10 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_prompt(t_prompt *prompt, char **argv, char **env)
 	prompt->cmds = NULL;
 	prompt->envp = ft_dup_matrix(env);
 	prompt->pid = getpid();
+	prompt->has_comma = 0;
 	g_status = 0;
 	init_varp(prompt, argv);
 }

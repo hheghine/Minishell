@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:05:12 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int	mini_here_doc(t_prompt *prompt, char *str[2], char *limiter)
 	}
 	str[1] = here_doc(str, limiter, \
 		"warning: here-document delimited by end-of-file", 0);
-	str[0] = expand_vars(str[1], prompt, q, -1);
+	if (!(prompt->has_comma))
+		str[0] = expand_vars(str[1], prompt, q, -1);
+	else
+		str[0] = str[1];
 	write(fd[WRITE_END], str[0], ft_strlen(str[0]));
 	free(str[0]);
 	close(fd[WRITE_END]);

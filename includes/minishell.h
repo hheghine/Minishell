@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/07 20:51:46 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:53:58 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_prompt
 	t_list	*cmds;
 	char	**envp;
 	pid_t	pid;
+	int	has_comma;
 }			t_prompt;
 
 typedef struct s_command
@@ -68,7 +69,7 @@ char		*get_prompt(t_prompt prompt);
 /****************************mini_parse.c***************************/
 void		*check_args(char *cmd, t_prompt *prompt);
 /***************************mini_cmdtrim.c**************************/
-char		**cmd_trim(const char *str, char *set);
+char		**cmd_trim(const char *str, char *set, t_prompt *prompt);
 /***************************mini_expand.c***************************/
 char		*expand_vars(char *s, t_prompt *prompt, int q[2], int i);
 char		*expand_path(char *s, int q[2], char *getpath, int i);

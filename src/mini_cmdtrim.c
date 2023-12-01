@@ -6,13 +6,13 @@
 /*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 22:06:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/09 19:18:54 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:54:38 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	count_words(const char *str, char *set, int i[2])
+static int	count_words(const char *str, char *set, int i[2], t_prompt *prompt)
 {
 	int	q[2];
 
@@ -26,7 +26,10 @@ static int	count_words(const char *str, char *set, int i[2])
 			while (str[i[0]] && (!ft_strchr(set, str[i[0]]) || q[0]))
 			{
 				if (!q[1] && (str[i[0]] == '\"' || str[i[0]] == '\''))
+				{
 					q[1] = str[i[0]];
+					prompt->has_comma = 1;
+				}
 				q[0] = (q[0] + (q[1] == str[i[0]])) % 2;
 				q[1] *= (q[0] != 0);
 				i[0]++;
@@ -67,7 +70,7 @@ static char	**fill_matrix(char **trimmed, const char *str, char *set, int i[3])
 	return (trimmed);
 }
 
-char	**cmd_trim(const char *str, char *set)
+char	**cmd_trim(const char *str, char *set, t_prompt *prompt)
 {
 	char	**trimmed;
 	int		wcount;
@@ -81,7 +84,7 @@ char	**cmd_trim(const char *str, char *set)
 	idx[1] = 0;
 	if (!str)
 		return (NULL);
-	wcount = count_words(str, set, idx);
+	wcount = count_words(str, set, idx, prompt);
 	if (wcount == -1)
 		return (mini_error(EQUOTE, NULL, 1));
 	trimmed = (char **)malloc(sizeof(char *) * (wcount + 1));
