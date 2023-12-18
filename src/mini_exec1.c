@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:31:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 char	*find_command(char **env_path, char *cmd, char *full_path)
 {

@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 00:40:21 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 char	*expand_path(char *s, int q[2], char *getpath, int i)
 {

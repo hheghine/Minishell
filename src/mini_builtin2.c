@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 int	mini_cd(t_prompt *prompt)
 {
@@ -96,7 +96,6 @@ int	mini_exit(t_list *cmd, int *isexit)
 
 	node = cmd->content;
 	*isexit = !(cmd->next);
-	// is_exit(isexit);
 	if (!node->full_cmd || !node->full_cmd[1])
 		return (g_status);
 	status[0] = ft_atoi_ext(node->full_cmd[1], &status[1]);

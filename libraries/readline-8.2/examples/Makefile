@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /home/heghine/Desktop/Minishell/readline_heghine
+prefix = /Users/hbalasan/Desktop/Minishell/readline_heghine
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /home/heghine/Desktop/Minishell/libraries/readline-8.2
+BUILD_DIR = /Users/hbalasan/Desktop/Minishell/libraries/readline-8.2
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

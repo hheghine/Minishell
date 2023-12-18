@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/01 11:54:10 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 void	init_varp(t_prompt *prompt, char **argv)
 {
@@ -57,7 +57,6 @@ int	main(int argc, char **argv, char **env)
 	char		*str;
 	char		*cmd ;
 
-	cmd = "";
 	if (argc > 1)
 		error_msg("Minishell doesn't take any arguments!\033[0m");
 	printf("\n%s\n\n", MINISHELL1);
@@ -75,6 +74,7 @@ int	main(int argc, char **argv, char **env)
 			cmd = readline(READLINE_MSG1);
 		if (!check_args(cmd, &prompt))
 			break ;
+		prompt.has_comma = 0;
 	}
 	free_prompt(&prompt);
 	return (g_status);

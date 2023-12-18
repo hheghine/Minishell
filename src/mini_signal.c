@@ -6,13 +6,13 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:00:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/23 18:36:31 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:53:05 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	g_status;
+// int	g_status;
 
 static int	quit_handler(void)
 {

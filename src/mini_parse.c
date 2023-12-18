@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/01 11:52:20 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 char	**split_final(char **args, t_prompt *prompt)
 {

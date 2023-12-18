@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/01 12:05:12 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 char	*here_doc(char *str[2], char *limiter, char *warning, uint64_t len)
 {

@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cmdtrim.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 22:06:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/01 11:54:38 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:17:43 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	quote_detected(t_prompt *prompt, int *q, const char *c)
+{
+	*q = *c;
+	prompt->has_comma = 1;
+}
 
 static int	count_words(const char *str, char *set, int i[2], t_prompt *prompt)
 {
@@ -26,10 +32,7 @@ static int	count_words(const char *str, char *set, int i[2], t_prompt *prompt)
 			while (str[i[0]] && (!ft_strchr(set, str[i[0]]) || q[0]))
 			{
 				if (!q[1] && (str[i[0]] == '\"' || str[i[0]] == '\''))
-				{
-					q[1] = str[i[0]];
-					prompt->has_comma = 1;
-				}
+					quote_detected(prompt, &q[1], &str[i[0]]);
 				q[0] = (q[0] + (q[1] == str[i[0]])) % 2;
 				q[1] *= (q[0] != 0);
 				i[0]++;

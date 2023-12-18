@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/01 11:53:58 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:52:38 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@
 # define CTRLC 130	 // the exit status code of the program that was terminated by receiving the SIGINT signal
 /*********************/
 
+int	g_status;
+
 typedef struct s_prompt
 {
 	t_list	*cmds;
 	char	**envp;
 	pid_t	pid;
-	int	has_comma;
+	int		has_comma;
 }			t_prompt;
 
 typedef struct s_command
@@ -101,6 +103,11 @@ int			mini_exit(t_list *cmd, int *isexit);
 /**************************mini_builtin3.c**************************/
 int			mini_unset(t_prompt *prompt);
 int			mini_export(t_prompt *prompt, t_list *cmd);
+/************************mini_export_utils.c************************/
+void		mini_export_noarg(t_prompt *prompt);
+void		export_declare_x(char **m);
+int			mini_unset(t_prompt *prompt);
+int			find_from_envp(char *var, char **envp, int i[2]);
 /****************************mini_exec1.c***************************/
 void		*exec_command(t_prompt *prompt, t_list *cmd);
 void		get_command(t_prompt *prompt, t_list *cmd);
