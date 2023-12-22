@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/22 18:56:42 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:21:46 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define WRITE_END 1 //
 /*********************/
 /*******Signals*******/
-# define SIGINT 2	 // the signal number for SIGINT (Signal Interrupt)
-# define CTRLC 1	 // the exit status code of the program that was terminated by receiving the SIGINT signal
+# define SIGINT 2	 //
+# define CTRLC 1	 //
 /*********************/
 
 int	g_status;
@@ -57,8 +57,8 @@ typedef struct s_command
 
 /***************************mini_signal.c***************************/
 void		sigaction_handler1(void);
-void    	sigaction_handler2(void);
-void    	sigaction_handler3(void);
+void		sigaction_handler2(void);
+void		sigaction_handler3(void);
 void		handle_sigint(int sig);
 /*****************************mini_env.c****************************/
 char		**set_env(char *var, char *value, char **envp);
@@ -80,18 +80,17 @@ char		**cmd_subsplit(const char *str, char *set);
 /**************************mini_strtrim_q.c*************************/
 char		*strtrim_quotes(const char *str, int squote, int dquote);
 /****************************mini_nodes.c***************************/
-// t_list		*fill_nodes(char **args, int i);
-t_list	*fill_nodes(t_prompt *prompt, char **args, int i);
+t_list		*fill_nodes(t_prompt *prompt, char **args, int i);
 /*****************************mini_fd.c*****************************/
 int			get_fd(int prev_fd, char *path, int flags[2]);
 /***************************mini_iofiles.c**************************/
 t_command	*open_outfile1(t_command *node, char **args, int *i);
 t_command	*open_outfile2(t_command *node, char **args, int *i);
 t_command	*open_infile1(t_command *node, char **args, int *i);
-// t_command	*open_infile2(t_command *node, char **args, int *i);
-t_command	*open_infile2(t_prompt *prompt, t_command *node, char **args, int *i);
+t_command	*open_infile2(t_prompt *prompt, t_command *node,
+				char **args, int *i);
 /***************************mini_heredoc.c**************************/
-int				mini_here_doc(t_prompt *prompt, char *str[2], char *limiter);
+int			mini_here_doc(t_prompt *prompt, char *str[2], char *limiter);
 /***************************mini_builtin1.c*************************/
 int			mini_builtin(t_prompt *prompt, t_list *cmd, int *isexit, int n);
 bool		is_builtin(t_command *cmd);

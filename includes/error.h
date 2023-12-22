@@ -6,14 +6,14 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 01:53:08 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 02:43:20 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:27:14 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-typedef enum e_error
+typedef enum s_error
 {
 	EPERM = 1, // permission denied: 126
 	EMEM, // no memory left on device 
@@ -26,13 +26,11 @@ typedef enum e_error
 	EPIPEND, // syntax error near unexpected token `|'
 	DUPERR, // dup2 failed
 	EQUOTE // error while looking for matching quote
-} e_error;
+}		t_error;
 
-/************************mini_error.c************************/
 void	error_msg(char *msg);
 void	*mini_error(int errmsg, char *param, int errcode);
 void	print_error_msg_fd(char *msg, int nl);
 void	mini_cd_error(char **full_cmd, char **str);
-/************************************************************/
 
 #endif
