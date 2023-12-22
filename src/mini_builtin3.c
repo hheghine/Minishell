@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:27:54 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:47:43 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:11:20 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	mini_export(t_prompt *p, t_list *c)
 	char		**splitted;
 	int			i[3];
 
-	if (ft_matrixlen(((t_command *)c->content)->full_cmd) == 1)
+	splitted = NULL;if (ft_matrixlen(((t_command *)c->content)->full_cmd) == 1)
 		mini_export_noarg(p);
 	if (ft_matrixlen(((t_command *)c->content)->full_cmd) >= 2)
 	{

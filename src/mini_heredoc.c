@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:28:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/22 18:59:09 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*here_doc(char *str[2], char *limiter, char *warning, uint64_t len)
 {
 	char	*temp;
 
-	while (g_status != 130 && (!str[0] || ft_strncmp(str[0], limiter, len) \
+	while (g_status != CTRLC && (!str[0] || ft_strncmp(str[0], limiter, len) \
 		|| (uint64_t)ft_strlen(limiter) != len))
 	{
 		temp = str[1];
@@ -61,7 +61,7 @@ int	mini_here_doc(t_prompt *prompt, char *str[2], char *limiter)
 	write(fd[WRITE_END], str[0], ft_strlen(str[0]));
 	free(str[0]);
 	close(fd[WRITE_END]);
-	if (g_status == 130)
+	if (g_status == CTRLC)
 	{
 		close(fd[READ_END]);
 		return (-1);

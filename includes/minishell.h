@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:52:38 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/22 18:56:42 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 /*********************/
 /*******Signals*******/
 # define SIGINT 2	 // the signal number for SIGINT (Signal Interrupt)
-# define CTRLC 130	 // the exit status code of the program that was terminated by receiving the SIGINT signal
+# define CTRLC 1	 // the exit status code of the program that was terminated by receiving the SIGINT signal
 /*********************/
 
 int	g_status;
