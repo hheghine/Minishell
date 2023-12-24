@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/tmnatsak/Desktop/Minishell/libraries/readline-8.2
+BUILD_DIR = /home/heghine/Desktop/Minishell/libraries/readline-8.2
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/tmnatsak/Desktop/Minishell/readline_heghine
+prefix = /home/heghine/Desktop/Minishell/readline_heghine
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

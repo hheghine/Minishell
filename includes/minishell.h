@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:06:09 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/22 20:21:46 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/24 22:16:12 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define CTRLC 1	 //
 /*********************/
 
-int	g_status;
+extern int	g_status;
 
 typedef struct s_prompt
 {
