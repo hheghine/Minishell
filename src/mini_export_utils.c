@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:26:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:31:53 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:59:25 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,34 @@ void	export_declare_x(char **m)
 	}
 }
 
+static void	equal_found(char **temp, char **splitted, char *str[2], int i)
+{
+	splitted = ft_split_once(temp[i], '=');
+	str[0] = ft_strjoin(splitted[0], "\"");
+	str[1] = ft_strjoin(str[0], splitted[1]);
+	free(str[0]);
+	str[0] = ft_strjoin(str[1], "\"");
+	free(str[1]);
+	str[1] = temp[i];
+	temp[i] = str[0];
+	free(str[1]);
+	ft_free_matrix(&splitted);
+}
+
 void	mini_export_noarg(t_prompt *prompt)
 {
 	char	**temp;
 	char	**splitted;
 	char	*str[2];
-	int		i;
+	int		i[2];
 
 	temp = ft_alphabetical_matrix(prompt->envp);
-	i = -1;
-	while (temp[++i])
+	i[0] = -1;
+	while (temp[++i[0]])
 	{
-		splitted = ft_split_once(temp[i], '=');
-		str[0] = ft_strjoin(splitted[0], "\"");
-		str[1] = ft_strjoin(str[0], splitted[1]);
-		free(str[0]);
-		str[0] = ft_strjoin(str[1], "\"");
-		free(str[1]);
-		str[1] = temp[i];
-		temp[i] = str[0];
-		free(str[1]);
-		ft_free_matrix(&splitted);
+		i[1] = ft_strchr_idx(temp[i[0]], '=');
+		if (i[1] != -1)
+			equal_found(temp, splitted, str, i[0]);
 	}
 	export_declare_x(temp);
 	ft_printmatrix_fd(temp, 1);
