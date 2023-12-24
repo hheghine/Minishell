@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 02:28:45 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:29:03 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	mini_exit(t_list *cmd, int *isexit)
 	if (!node->full_cmd || !node->full_cmd[1])
 		return (g_status);
 	status[0] = ft_atoi_ext(node->full_cmd[1], &status[1]);
-	if (status[0] == -1)
+	if (status[0] == -1 || (status[0] == 0 && status[1] != 0))
 	{
 		print_error_msg_fd("exit: ", 0);
 		ft_putstr_fd("\033[1;33m", 2);
