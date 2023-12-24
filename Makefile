@@ -6,7 +6,7 @@
 #    By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 01:49:43 by hbalasan          #+#    #+#              #
-#    Updated: 2023/12/24 16:25:45 by tmnatsak         ###   ########.fr        #
+#    Updated: 2023/12/24 19:39:17 by tmnatsak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJS			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 INCS			= -I./includes -I./readline_heghine/include
 CC				= cc 
 RM				= rm -rf
-CFLAGS			= -fsanitize=address -g #-Wall -Wextra -Werror
+CFLAGS			= -fsanitize=address -g -Wall -Wextra -Werror
 LIBFLAGS		= -Lreadline_heghine/lib -lreadline -lhistory
 
 ifeq ($(PLATFORM), Linux)

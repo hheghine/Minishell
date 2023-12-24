@@ -87,5 +87,6 @@ If a match is found, it returns the index of the character in s; otherwise, it r
 int		ft_strchr_set(const char *s, char *set);
 int		ft_charcount(char *str, char c);
 char	**ft_split_once(char *str, int c);
+long	ft_atol(const char *s);
 
 #endif

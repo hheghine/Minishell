@@ -6,7 +6,7 @@
 /*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:26:58 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/24 16:59:25 by tmnatsak         ###   ########.fr       */
+/*   Updated: 2023/12/24 19:39:52 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	mini_export_noarg(t_prompt *prompt)
 	char	*str[2];
 	int		i[2];
 
+	splitted = NULL;
 	temp = ft_alphabetical_matrix(prompt->envp);
 	i[0] = -1;
 	while (temp[++i[0]])

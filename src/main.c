@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:21:22 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/24 20:23:49 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,3 @@ int	main(int argc, char **argv, char **env)
 	free_prompt(&prompt);
 	return (g_status);
 }
-
-// exit LLONG_MAX exit code 1
-// ctrl+c exit code 1 not 130
-// cat + ctrl+c -> exit code 130 && cat + ctrl+\ ->exitcode 131
-// exit code for here-doc 1 nor 130
-// export naming 

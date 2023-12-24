@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmnatsak <tmnatsak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 21:35:14 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/12/18 20:52:49 by hbalasan         ###   ########.fr       */
+/*   Updated: 2023/12/24 20:24:06 by tmnatsak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ char	**split_final(char **args, t_prompt *prompt)
 	return (args);
 }
 
+static void	*exit_with_arg(t_prompt *prompt)
+{
+	ft_lstclear(&prompt->cmds, free_content);
+	return (NULL);
+}
+
 void	*parse_args(char **args, t_prompt *prompt)
 {
 	char	**splitted;
@@ -53,16 +59,15 @@ void	*parse_args(char **args, t_prompt *prompt)
 	while (--i >= 0)
 	{
 		wait(&g_status);
+		if (WIFEXITED(g_status))
+			g_status = WEXITSTATUS(g_status);
 	}
 	if (!isexit && (g_status == 3 || g_status == 13))
 		g_status = 0;
 	if (g_status > 255)
 		g_status %= 255;
 	if (isexit && args)
-	{
-		ft_lstclear(&prompt->cmds, free_content);
-		return (NULL);
-	}
+		return (exit_with_arg(prompt));
 	return (prompt);
 }
 
