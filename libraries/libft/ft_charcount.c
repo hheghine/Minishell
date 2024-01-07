@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 00:43:40 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/10/31 00:59:14 by hbalasan         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:00:12 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_charcount(char *str, char c)
 {
 	int	count;
-	
+
 	count = 0;
 	while (str && *str)
 	{

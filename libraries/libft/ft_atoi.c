@@ -65,7 +65,7 @@ int	ft_atoi_ext(const char *c, long *num)
 	return (0);
 }
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
 	const char	*str;
 	int			i;

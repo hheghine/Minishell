@@ -6,7 +6,7 @@
 /*   By: hbalasan <hbalasan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 23:05:52 by hbalasan          #+#    #+#             */
-/*   Updated: 2023/11/01 15:31:57 by hbalasan         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:00:30 by hbalasan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_matrixline_swap(char **m, int i, int j)
 char	**ft_alphabetical_matrix(char **m)
 {
 	char	**matrix;
-	int	i[2];
-	int	len;
+	int		i[2];
+	int		len;
 
 	i[0] = -1;
 	i[1] = 0;

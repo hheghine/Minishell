@@ -1,4 +1,4 @@
-prefix=/home/heghine/Desktop/Minishell/readline_heghine
+prefix=/Users/hbalasan/Desktop/f/readline_heghine
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

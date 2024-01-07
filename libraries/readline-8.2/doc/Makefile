@@ -22,7 +22,7 @@ topdir = ..
 srcdir = .
 
 
-prefix = /home/heghine/Desktop/Minishell/readline_heghine
+prefix = /Users/hbalasan/Desktop/f/readline_heghine
 
 datarootdir = ${prefix}/share
 
@@ -49,7 +49,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-BUILD_DIR = /home/heghine/Desktop/Minishell/libraries/readline-8.2
+BUILD_DIR = /Users/hbalasan/Desktop/f/libraries/readline-8.2
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo

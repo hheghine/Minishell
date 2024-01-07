@@ -74,16 +74,11 @@ int		ft_matrixlen(char **matrix);
 void	ft_free_matrix(char ***m);
 char	**ft_dup_matrix(char **m);
 char	**ft_extend_matrix(char **in, char *newstr);
-/*Replaces n-th line with another matrix*/
 char	**ft_matrix_replace(char ***big, char **small, int n);
 void	ft_printmatrix_fd(char **matrix, int fd);
 void	ft_matrixline_swap(char **m, int i, int j);
 char	**ft_alphabetical_matrix(char **m);
-/* Searches for the first occurrence of a character in a string and returns
-the index of that character in the string, or -1 if the character is not found */
 int		ft_strchr_idx(const char *s, int c);
-/* Searches for the first occurrence of any character in the set within the input string s.
-If a match is found, it returns the index of the character in s; otherwise, it returns -1.*/
 int		ft_strchr_set(const char *s, char *set);
 int		ft_charcount(char *str, char c);
 char	**ft_split_once(char *str, int c);
